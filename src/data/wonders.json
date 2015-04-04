@@ -1,0 +1,1186 @@
+{
+  "wonders": [
+    {
+      "wonder": {
+        "name": "Manneken Pis Bruxells (A)",
+        "benefit": [
+          {
+            "class": "classes.Coin",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "4"
+              }
+            ]
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.CopyLeftAgeOneWonderStage",
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.CopyRightAgeTwoWonderStage",
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.CopyLeftOrRightAgeThreeWonderStage",
+            "cost": [
+              {
+                "class": "cards.manufacturedgoods.Glass"
+              },
+              {
+                "class": "cards.manufacturedgoods.Papyrus"
+              },
+              {
+                "class": "cards.manufacturedgoods.Textile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "Manneken Pis Bruxells (B)",
+        "benefit": [
+          {
+            "class": "classes.Coin",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "4"
+              }
+            ]
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.CompositeWonderStage",
+            "constructor": [
+              [
+                {
+                  "class": "wonders.wonderstage.CoinWonderStage",
+                  "constructor": [
+                    {
+                      "class": "classes.Coin",
+                      "constructor": [
+                        {
+                          "class": "int",
+                          "constructor": "7"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "class": "wonders.wonderstage.MilitaryWonderStage",
+                  "constructor": [
+                    {
+                      "class": "int",
+                      "constructor": "1"
+                    }
+                  ]
+                },
+                {
+                  "class": "wonders.wonderstage.PointWonderStage",
+                  "constructor": [
+                    {
+                      "class": "int",
+                      "constructor": "7"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.manufacturedgoods.Glass"
+              },
+              {
+                "class": "cards.manufacturedgoods.Papyrus"
+              },
+              {
+                "class": "cards.manufacturedgoods.Textile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "Mausoleum of Halicarnassus (A)",
+        "benefit": [
+          {
+            "class": "classes.Coin",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "4"
+              }
+            ]
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "3"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.BuildDiscardedBuildingWonderStage",
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.rawmaterials.Ore"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "7"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.manufacturedgoods.Textile"
+              },
+              {
+                "class": "cards.manufacturedgoods.Textile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "Mausoleum of Halicarnassus (B)",
+        "benefit": [
+          {
+            "class": "classes.Coin",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "4"
+              }
+            ]
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.CompositeWonderStage",
+            "constructor": [
+              [
+                {
+                  "class": "wonders.wonderstage.PointWonderStage",
+                  "constructor": [
+                    {
+                      "class": "int",
+                      "constructor": "2"
+                    }
+                  ]
+                },
+                {
+                  "class": "wonders.wonderstage.BuildDiscardedBuildingWonderStage"
+                }
+              ]
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.rawmaterials.Ore"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.CompositeWonderStage",
+            "constructor": [
+              [
+                {
+                  "class": "wonders.wonderstage.PointWonderStage",
+                  "constructor": [
+                    {
+                      "class": "int",
+                      "constructor": "1"
+                    }
+                  ]
+                },
+                {
+                  "class": "wonders.wonderstage.BuildDiscardedBuildingWonderStage"
+                }
+              ]
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.BuildDiscardedBuildingWonderStage",
+            "cost": [
+              {
+                "class": "cards.manufacturedgoods.Glass"
+              },
+              {
+                "class": "cards.manufacturedgoods.Papyrus"
+              },
+              {
+                "class": "cards.manufacturedgoods.Textile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "The Statue of Zeus in Olympia (A)",
+        "benefit": [
+          {
+            "class": "cards.rawmaterials.Wood"
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "3"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.BuildOneFreeBuildingEachAgeWonderStage",
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "7"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.rawmaterials.Ore"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "The Statue of Zeus in Olympia (B)",
+        "benefit": [
+          {
+            "class": "cards.rawmaterials.Wood"
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.RawMaterialTradeWithNeighboursCostOneCoinWonderStage",
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "5"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.CopyGuildFromOneNeighbourWonderStage",
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.manufacturedgoods.Textile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "The Pyramids of Giza (A)",
+        "benefit": [
+          {
+            "class": "cards.rawmaterials.Stone"
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "3"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "5"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "7"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "The Pyramids of Giza (B)",
+        "benefit": [
+          {
+            "class": "cards.rawmaterials.Stone"
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "3"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "5"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "5"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "7"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.manufacturedgoods.Papyrus"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "The Colossus of Rhodes (A)",
+        "benefit": [
+          {
+            "class": "cards.rawmaterials.Ore"
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "3"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.MilitaryWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "2"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "7"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.rawmaterials.Ore"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "The Colossus of Rhodes (B)",
+        "benefit": [
+          {
+            "class": "cards.rawmaterials.Ore"
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.CompositeWonderStage",
+            "constructor": [
+              [
+                {
+                  "class": "wonders.wonderstage.CoinWonderStage",
+                  "constructor": [
+                    {
+                      "class": "classes.Coin",
+                      "constructor": [
+                        {
+                          "class": "int",
+                          "constructor": "3"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "class": "wonders.wonderstage.MilitaryWonderStage",
+                  "constructor": [
+                    {
+                      "class": "int",
+                      "constructor": "1"
+                    }
+                  ]
+                },
+                {
+                  "class": "wonders.wonderstage.PointWonderStage",
+                  "constructor": [
+                    {
+                      "class": "int",
+                      "constructor": "3"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.CompositeWonderStage",
+            "constructor": [
+              [
+                {
+                  "class": "wonders.wonderstage.CoinWonderStage",
+                  "constructor": [
+                    {
+                      "class": "classes.Coin",
+                      "constructor": [
+                        {
+                          "class": "int",
+                          "constructor": "4"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "class": "wonders.wonderstage.MilitaryWonderStage",
+                  "constructor": [
+                    {
+                      "class": "int",
+                      "constructor": "1"
+                    }
+                  ]
+                },
+                {
+                  "class": "wonders.wonderstage.PointWonderStage",
+                  "constructor": [
+                    {
+                      "class": "int",
+                      "constructor": "4"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.rawmaterials.Ore"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "The Temple of Artemis in Ephesus (B)",
+        "benefit": [
+          {
+            "class": "cards.manufacturedgoods.Papyrus"
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.CompositeWonderStage",
+            "constructor": [
+              [
+                {
+                  "class": "wonders.wonderstage.CoinWonderStage",
+                  "constructor": [
+                    {
+                      "class": "classes.Coin",
+                      "constructor": [
+                        {
+                          "class": "int",
+                          "constructor": "4"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "class": "wonders.wonderstage.PointWonderStage",
+                  "constructor": [
+                    {
+                      "class": "int",
+                      "constructor": "2"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.CompositeWonderStage",
+            "constructor": [
+              [
+                {
+                  "class": "wonders.wonderstage.CoinWonderStage",
+                  "constructor": [
+                    {
+                      "class": "classes.Coin",
+                      "constructor": [
+                        {
+                          "class": "int",
+                          "constructor": "4"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "class": "wonders.wonderstage.PointWonderStage",
+                  "constructor": [
+                    {
+                      "class": "int",
+                      "constructor": "3"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.CompositeWonderStage",
+            "constructor": [
+              [
+                {
+                  "class": "wonders.wonderstage.CoinWonderStage",
+                  "constructor": [
+                    {
+                      "class": "classes.Coin",
+                      "constructor": [
+                        {
+                          "class": "int",
+                          "constructor": "4"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "class": "wonders.wonderstage.PointWonderStage",
+                  "constructor": [
+                    {
+                      "class": "int",
+                      "constructor": "5"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "The Temple of Artemis in Ephesus (A)",
+        "benefit": [
+          {
+            "class": "cards.manufacturedgoods.Papyrus"
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "3"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.CoinWonderStage",
+            "constructor": [
+              {
+                "class": "classes.Coin",
+                "constructor": [
+                  {
+                    "class": "int",
+                    "constructor": "9"
+                  }
+                ]
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "7"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.manufacturedgoods.Glass"
+              },
+              {
+                "class": "cards.manufacturedgoods.Papyrus"
+              },
+              {
+                "class": "cards.manufacturedgoods.Textile"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "The Lighthouse of Alexandria (A)",
+        "benefit": [
+          {
+            "class": "cards.manufacturedgoods.Glass"
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "3"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.WildRawMaterialWonderStage",
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Ore"
+              },
+              {
+                "class": "cards.rawmaterials.Ore"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "7"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.manufacturedgoods.Glass"
+              },
+              {
+                "class": "cards.manufacturedgoods.Glass"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "The Lighthouse of Alexandria (B)",
+        "benefit": [
+          {
+            "class": "cards.manufacturedgoods.Glass"
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.WildRawMaterialWonderStage",
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.WildManufacturedGoodWonderStage",
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "7"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              },
+              {
+                "class": "cards.rawmaterials.Stone"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "The Hanging Gardens of Babylon (A)",
+        "benefit": [
+          {
+            "class": "cards.rawmaterials.Clay"
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "3"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.WildScientificStructureWonderStage",
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "7"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "wonder": {
+        "name": "The Hanging Gardens of Babylon (B)",
+        "benefit": [
+          {
+            "class": "cards.rawmaterials.Clay"
+          }
+        ],
+        "wonderStages": [
+          {
+            "class": "wonders.wonderstage.PointWonderStage",
+            "constructor": [
+              {
+                "class": "int",
+                "constructor": "3"
+              }
+            ],
+            "cost": [
+              {
+                "class": "cards.manufacturedgoods.Textile"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.PlayLastCardWonderStage",
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.rawmaterials.Wood"
+              },
+              {
+                "class": "cards.manufacturedgoods.Glass"
+              }
+            ]
+          },
+          {
+            "class": "wonders.wonderstage.WildScientificStructureWonderStage",
+            "cost": [
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.rawmaterials.Clay"
+              },
+              {
+                "class": "cards.manufacturedgoods.Papyrus"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

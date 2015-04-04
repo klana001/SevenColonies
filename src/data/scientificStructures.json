@@ -1,0 +1,303 @@
+{
+    "AGE_1": [
+        {
+            "scientificStructure": {
+                "name": "Workshop",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.scientificstructures.Cog"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    }
+                ]
+            }
+        },
+        {
+            "scientificStructure": {
+                "name": "Apothecary",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.scientificstructures.Sextant"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    }
+                ]
+            }
+        },
+        {
+            "scientificStructure": {
+                "name": "Scriptorium",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.scientificstructures.Tablet"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Papyrus"
+                    }
+                ]
+            }
+        }
+    ],
+    "AGE_2": [
+        {
+            "scientificStructure": {
+                "name": "Library",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.scientificstructures.Tablet"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Scriptorium"
+                    }
+                ]
+            }
+        },
+        {
+            "scientificStructure": {
+                "name": "School",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.scientificstructures.Tablet"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    }
+                ]
+            }
+        },
+        {
+            "scientificStructure": {
+                "name": "Dispensary",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.scientificstructures.Sextant"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Apothecary"
+                    }
+                ]
+            }
+        },
+        {
+            "scientificStructure": {
+                "name": "Laboratory",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.scientificstructures.Cog"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Papyrus"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Workshop"
+                    }
+                ]
+            }
+        }
+    ],
+    "AGE_3": [
+        {
+            "scientificStructure": {
+                "name": "Academy",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.scientificstructures.Sextant"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "School"
+                    }
+                ]
+            }
+        },
+        {
+            "scientificStructure": {
+                "name": "Study",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.scientificstructures.Cog"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Papyrus"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "School"
+                    }
+                ]
+            }
+        },
+        {
+            "scientificStructure": {
+                "name": "University",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.scientificstructures.Tablet"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Papyrus"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Library"
+                    }
+                ]
+            }
+        },
+        {
+            "scientificStructure": {
+                "name": "Lodge",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.scientificstructures.Sextant"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Papyrus"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Dispensary"
+                    }
+                ]
+            }
+        },
+        {
+            "scientificStructure": {
+                "name": "Observatory",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.scientificstructures.Cog"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Laboratory"
+                    }
+                ]
+            }
+        }
+    ]
+}

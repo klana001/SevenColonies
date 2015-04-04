@@ -1,0 +1,187 @@
+{
+    "AGE_1": [
+        {
+            "commercialStructure": {
+                "name": "West Trading Post",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.commercial.LeftTradeRawMaterialsForOneCoin"
+                    }
+                ]
+            }
+        },
+        {
+            "commercialStructure": {
+                "name": "Marketplace",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.commercial.TradeManufacturedGoodsForOneCoin"
+                    }
+                ]
+            }
+        },
+        {
+            "commercialStructure": {
+                "name": "East Trading Post",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.commercial.TradeManufacturedGoodsForOneCoin"
+                    }
+                ]
+            }
+        }
+    ],
+    "AGE_2": [
+        {
+            "commercialStructure": {
+                "name": "Vineyard",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.commercial.LeftRightOwnCoinPerBrown"
+                    }
+                ]
+            }
+        },
+        {
+            "commercialStructure": {
+                "name": "Caravansery",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.rawmaterials.WildRawMaterial"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Marketplace"
+                    }
+                ]
+            }
+        },
+        {
+            "commercialStructure": {
+                "name": "Forum",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.manufacturedgoods.WildManufacturedGood"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Marketplace"
+                    }
+                ]
+            }
+        }
+    ],
+    "AGE_3": [
+        {
+            "commercialStructure": {
+                "name": "Lighthouse",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.commercial.OneCoinPerCommercialStructure"
+                    },
+                    {
+                        "class": "effects.commercial.OnePointPerCommercialStructure"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Caravansery"
+                    }
+                ]
+            }
+        },
+        {
+            "commercialStructure": {
+                "name": "Haven",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.commercial.OneCoinPerRawMaterialStructure"
+                    },
+                    {
+                        "class": "effects.commercial.OnePointPerRawMaterialStructure"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Forum"
+                    }
+                ]
+            }
+        },
+        {
+            "commercialStructure": {
+                "name": "Arena",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.commercial.ThreeCoinPerBuiltWonderStage"
+                    },
+                    {
+                        "class": "effects.commercial.OnePointPerBuiltWonderStage"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Dispensary"
+                    }
+                ]
+            }
+        }
+    ]
+}

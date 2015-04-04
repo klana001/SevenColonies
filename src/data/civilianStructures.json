@@ -1,0 +1,258 @@
+{
+    "AGE_1": [
+        {
+            "civilianStructure": {
+                "name": "Baths",
+                "players": "3",
+                "points": "3",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    }
+                ]
+            }
+        },
+        {
+            "civilianStructure": {
+                "name": "Altar",
+                "players": "3",
+                "points": "2"
+            }
+        },
+        {
+            "civilianStructure": {
+                "name": "Theater",
+                "players": "3",
+                "points": "2"
+            }
+        }
+    ],
+    "AGE_2": [
+        {
+            "civilianStructure": {
+                "name": "Statue",
+                "players": "3",
+                "points": "4",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Theater"
+                    }
+                ]
+            }
+        },
+        {
+            "civilianStructure": {
+                "name": "Temple",
+                "players": "3",
+                "points": "3",
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Altar"
+                    }
+                ]
+            }
+        },
+        {
+            "civilianStructure": {
+                "name": "Aqueduct",
+                "players": "3",
+                "points": "5",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Baths"
+                    }
+                ]
+            }
+        },
+        {
+            "civilianStructure": {
+                "name": "Courthouse",
+                "players": "3",
+                "points": "4",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Scriptorium"
+                    }
+                ]
+            }
+        }
+    ],
+    "AGE_3": [
+        {
+            "civilianStructure": {
+                "name": "Town Hall",
+                "players": "3",
+                "points": "6",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    }
+                ]
+            }
+        },
+        {
+            "civilianStructure": {
+                "name": "Gardens",
+                "players": "3",
+                "points": "5",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Statue"
+                    }
+                ]
+            }
+        },
+        {
+            "civilianStructure": {
+                "name": "Pantheon",
+                "players": "3",
+                "points": "7",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Papyrus"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Temple"
+                    }
+                ]
+            }
+        },
+        {
+            "civilianStructure": {
+                "name": "Senate",
+                "players": "3",
+                "points": "6",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    }, 
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Library"
+                    }
+                ]
+            }
+        },
+        {
+            "civilianStructure": {
+                "name": "Palace",
+                "players": "3",
+                "points": "8",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Papyrus"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    }
+                ]
+            }
+        }
+    ]
+}

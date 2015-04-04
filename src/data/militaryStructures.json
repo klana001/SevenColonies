@@ -1,0 +1,186 @@
+{
+    "AGE_1": [
+        {
+            "militaryStructure": {
+                "name": "Barracks",
+                "players": "3",
+                "strength": "1",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    }
+                ]
+            }
+        },
+        {
+            "militaryStructure": {
+                "name": "Stockade",
+                "players": "3",
+                "strength": "1",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    }
+                ]
+            }
+        },
+        {
+            "militaryStructure": {
+                "name": "Guard Tower",
+                "players": "3",
+                "strength": "1",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    }
+                ]
+            }
+        }
+    ],
+    "AGE_2": [
+        {
+            "militaryStructure": {
+                "name": "Archery Range",
+                "players": "3",
+                "strength": "2",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Workshop"
+                    }
+                ]
+            }
+        },
+        {
+            "militaryStructure": {
+                "name": "Stables",
+                "players": "3",
+                "strength": "2",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Apothecary"
+                    }
+                ]
+            }
+        },
+        {
+            "militaryStructure": {
+                "name": "Walls",
+                "players": "3",
+                "strength": "2",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Workshop"
+                    }
+                ]
+            }
+        }
+    ],
+    "AGE_3": [
+        {
+            "militaryStructure": {
+                "name": "Siege Workshop",
+                "players": "3",
+                "strength": "3",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Laboratory"
+                    }
+                ]
+            }
+        },
+        {
+            "militaryStructure": {
+                "name": "Fortifications",
+                "players": "3",
+                "strength": "3",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    }
+                ],
+                "upgradeableFrom": [
+                    {
+                        "building": "Walls"
+                    }
+                ]
+            }
+        },
+        {
+            "militaryStructure": {
+                "name": "Arsenal",
+                "players": "3",
+                "strength": "3",
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    }
+                ]
+            }
+        }
+    ]
+}

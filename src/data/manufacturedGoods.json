@@ -1,0 +1,72 @@
+{
+    "AGE_1": [
+        {
+            "manufacturedGood": {
+                "name": "Loom",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    }
+                ]
+            }
+        },
+        {
+            "manufacturedGood": {
+                "name": "Glassworks",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    }
+                ]
+            }
+        },
+        {
+            "manufacturedGood": {
+                "name": "Press",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.manufacturedgoods.Papyrus"
+                    }
+                ]
+            }
+        }
+    ],
+    "AGE_2": [
+        {
+            "manufacturedGood": {
+                "name": "Loom",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    }
+                ]
+            }
+        },
+        {
+            "manufacturedGood": {
+                "name": "Glassworks",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    }
+                ]
+            }
+        },
+        {
+            "manufacturedGood": {
+                "name": "Press",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.manufacturedgoods.Papyrus"
+                    }
+                ]
+            }
+        }
+    ]
+}

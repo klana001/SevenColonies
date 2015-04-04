@@ -1,0 +1,194 @@
+{
+    "AGE_1": [
+        {
+            "rawMaterial": {
+                "name": "Clay Pit",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.rawmaterials.ClayOrOre"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "classes.Coin",
+                        "constructor": [
+                            {
+                                "class": "int",
+                                "constructor": "1"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "rawMaterial": {
+                "name": "Clay Pool",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    }
+                ]
+            }
+        },
+        {
+            "rawMaterial": {
+                "name": "Ore Vein",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    }
+                ]
+            }
+        },
+        {
+            "rawMaterial": {
+                "name": "Stone Pit",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    }
+                ]
+            }
+        },
+        {
+            "rawMaterial": {
+                "name": "Timber Yard",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.rawmaterials.WoodOrStone"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "classes.Coin",
+                        "constructor": [
+                            {
+                                "class": "int",
+                                "constructor": "1"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "rawMaterial": {
+                "name": "Lumber Yard",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    }
+                ]
+            }
+        }
+    ],
+    "AGE_2": [
+        {
+            "rawMaterial": {
+                "name": "Foundary",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "classes.Coin",
+                        "constructor": [
+                            {
+                                "class": "int",
+                                "constructor": "1"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "rawMaterial": {
+                "name": "Quarry",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "classes.Coin",
+                        "constructor": [
+                            {
+                                "class": "int",
+                                "constructor": "1"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "rawMaterial": {
+                "name": "Brickyard",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "classes.Coin",
+                        "constructor": [
+                            {
+                                "class": "int",
+                                "constructor": "1"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "rawMaterial": {
+                "name": "Sawmill",
+                "players": "3",
+                "type": [
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "classes.Coin",
+                        "constructor": [
+                            {
+                                "class": "int",
+                                "constructor": "1"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}
