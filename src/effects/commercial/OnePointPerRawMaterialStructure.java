@@ -6,11 +6,6 @@ import effects.PointsPerType;
 
 public class OnePointPerRawMaterialStructure extends PointsPerType
 {
-	public OnePointPerRawMaterialStructure(OnePointPerRawMaterialStructure source)
-	{
-		super(1, RawMaterial.class);
-		// default copy constructor
-	}
 	
 	
 	public OnePointPerRawMaterialStructure()

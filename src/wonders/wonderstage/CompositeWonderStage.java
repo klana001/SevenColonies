@@ -28,12 +28,6 @@ public class CompositeWonderStage extends WonderStage implements Scoreable,Milit
 		this.wonderStages=wonderStages;
 	}
 	
-	public CompositeWonderStage(CompositeWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-		wonderStages=Utilities.cloneList(source.wonderStages);
-	}
-	
 	@Override
 	public int calculateScore()
 	{

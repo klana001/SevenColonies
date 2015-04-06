@@ -23,12 +23,6 @@ public class MilitaryWonderStage extends WonderStage implements Military
 		this.strengh=strength;
 	}
 	
-	public MilitaryWonderStage(MilitaryWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-		strengh = source.strengh;
-	}
-	
 	@Override
 	public int calculateMilitary()
 	{

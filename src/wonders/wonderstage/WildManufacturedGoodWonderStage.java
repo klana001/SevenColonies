@@ -5,6 +5,7 @@ import interfaces.ExchangableItem;
 import java.util.Arrays;
 import java.util.Collection;
 
+import player.Player;
 import common.NoCost;
 import common.Utilities;
 import cards.IManufacturedGood;
@@ -23,10 +24,6 @@ public class WildManufacturedGoodWonderStage extends WonderStage implements IMan
 		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
 	}
 	
-	public WildManufacturedGoodWonderStage(WildManufacturedGoodWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-	}
 
 	@Override
 	public String getName()
@@ -44,6 +41,12 @@ public class WildManufacturedGoodWonderStage extends WonderStage implements IMan
 	public Collection<IManufacturedGood> getManufacturedGoods()
 	{
 		return wildManufacturedGood.getManufacturedGoods();
+	}
+
+	@Override
+	public boolean equivilent(ExchangableItem otherItem, Player currentPlayer)
+	{
+		return wildManufacturedGood.equivilent(otherItem, null);
 	}
 
 }

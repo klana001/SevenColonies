@@ -18,11 +18,6 @@ public class OnePointPerBuiltWonderStage implements Effect
 		// default  constructor
 	}
 	
-	public OnePointPerBuiltWonderStage(OnePointPerBuiltWonderStage source)
-	{
-		super();
-		// default copy constructor
-	}
 	
 	@Override
 	public void performEffect(GameState gameState, Object... data)

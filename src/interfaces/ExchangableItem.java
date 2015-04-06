@@ -1,5 +1,7 @@
 package interfaces;
 
+import player.Player;
+
 /**
  * Represents an exchangeable item that maybe used for the purchase of a card or other items. 
  * @author default
@@ -7,5 +9,5 @@ package interfaces;
  */
 public interface ExchangableItem extends Comparable, GameElement
 {
-//	public boolean equivilent(ExchangableItem otherItem);
+	public boolean equivilent(ExchangableItem otherItem, Player currentPlayer);
 }

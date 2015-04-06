@@ -40,11 +40,6 @@ public class ActionGenerator
 			
 		}
 		
-		public Costings(Costings source)
-		{
-			costings = Utilities.cloneList(source.costings);
-		}
-		
 		@Override 
 		public int hashCode()
 		{
@@ -65,6 +60,11 @@ public class ActionGenerator
 			
 			for (CostedOwnedExchangableItem costedOwnedExchangableItem : costings)
 			{
+//				for (CostedOwnedExchangableItem otherCostedOwnedExchangableItem : otherCostings.getCostings())
+//				{
+//					if (costedOwnedExchangableItem.equivilent(otherCostedOwnedExchangableItem)) return false;
+//				}
+				
 				if (!(otherCostings.getCostings().contains(costedOwnedExchangableItem))) return false;
 			}
 			return true;
@@ -99,9 +99,9 @@ public class ActionGenerator
 		
 		for (Card card : player.getHand())
 		{
-			List<CostedOwnedExchangableItem> availableExchangableItemsCopy = Utilities.cloneList(availableExchangableItems);
-			List<ExchangableItem> cardRequirements = Utilities.cloneList(card.getCost());
-			
+			List<CostedOwnedExchangableItem> availableExchangableItemsCopy = Utilities.cloneObject(availableExchangableItems);
+			List<ExchangableItem> cardRequirements = new ArrayList<ExchangableItem>(Utilities.cloneObject(card.getCost()));
+			Player localPlayerCopy = Utilities.cloneObject(player);
 	
 			if (cardRequirements.isEmpty())
 			{
@@ -110,9 +110,9 @@ public class ActionGenerator
 			else
 			{
 				
-				List<Effect> tradeEffects = Utilities.cloneList(tradeEffectsMaster);
+				List<Effect> tradeEffects = Utilities.cloneObject(tradeEffectsMaster);
 				
-				Set<Costings> uniqueCostings = resolveUniqueCostingCombinations(gameState, player, cardRequirements, availableExchangableItemsCopy,tradeEffects );
+				Set<Costings> uniqueCostings = resolveUniqueCostingCombinations(gameState, localPlayerCopy, cardRequirements, availableExchangableItemsCopy,tradeEffects );
 				
 				
 				// create and add build card actions for each unique costing...
@@ -149,33 +149,53 @@ public class ActionGenerator
 		else
 		{
 
-			List<CostedOwnedExchangableItem> exchangeableItemsThatMeetRequirment = availableExchangableItems.stream().filter(c->requirement.equals(c.getItem())).collect(Collectors.toList());
+//			List<CostedOwnedExchangableItem> exchangeableItemsThatMeetRequirment = availableExchangableItems.stream().filter(c->requirement.equivilent(c.getItem())).collect(Collectors.toList());
+			List<CostedOwnedExchangableItem> exchangeableItemsThatMeetRequirment = availableExchangableItems.stream().filter(c->c.getItem().equivilent(requirement, player)).collect(Collectors.toList());
+			
+			List<ExchangableItem> newRemainingCardRequirements = Utilities.cloneObject(remainingCardRequirements);
+			ExchangableItem nextRequirement = newRemainingCardRequirements.isEmpty()?null:newRemainingCardRequirements.remove(0);
 			
 			while (exchangeableItemsThatMeetRequirment.size()>0)
 			{
 				CostedOwnedExchangableItem originalItem = exchangeableItemsThatMeetRequirment.remove(0);
+				if (originalItem.getCost()>player.getCoins())
+				{
+					break;
+				}
 				
-				CostedOwnedExchangableItem item = new CostedOwnedExchangableItem(requirement, originalItem.getCost(), originalItem.getOwner()); 
+				CostedOwnedExchangableItem item; 
+				
+				// hack! we need the requirement coin otherwise the player coins will be used!
+				if (requirement instanceof Coin)
+				{
+					item = new CostedOwnedExchangableItem(requirement, originalItem.getCost(), originalItem.getOwner()); 
+				}
+				else
+				{
+					item = new CostedOwnedExchangableItem(originalItem.getItem(), originalItem.getCost(), originalItem.getOwner());
+				}
+				Player newPlayer = Utilities.cloneObject(player);
+				newPlayer.setCoins(newPlayer.getCoins()-originalItem.getCost());
 				
 				for (Effect effect : tradeEffects)
 				{
-					effect.performEffect(gameState, item, player);
+					effect.performEffect(gameState, item, newPlayer);
 				}
 				
-				costings.add(item);
-				
-				Costings newCostings=new Costings(costings);
-				
-				List<CostedOwnedExchangableItem> newAvailableExchangableItems = Utilities.cloneList(availableExchangableItems);
-				newAvailableExchangableItems.remove(item);
-				
-				ExchangableItem nextRequirement = remainingCardRequirements.isEmpty()?null:remainingCardRequirements.remove(0);
-				List<ExchangableItem> newRemainingCardRequirements = Utilities.cloneList(remainingCardRequirements);
-				
-				List<Effect> newTradeEffects = Utilities.cloneList(tradeEffects);
+				Costings newCostings= Utilities.cloneObject(costings);
+				newCostings.add(item);
+					
+				List<CostedOwnedExchangableItem> newAvailableExchangableItems = Utilities.cloneObject(availableExchangableItems);
+				if (!newAvailableExchangableItems.removeIf(i->i.equivilent(item)))
+				{
+					throw new RuntimeException("Unable to remove: "+item+" from available exchangable items... item is not found.");
+				};
 				
 				
-				resolveUniqueCostingCombinations(gameState, player, nextRequirement,newRemainingCardRequirements,newAvailableExchangableItems,newTradeEffects,uniqueCostings,newCostings);
+				List<Effect> newTradeEffects = Utilities.cloneObject(tradeEffects);
+				
+				
+				resolveUniqueCostingCombinations(gameState, newPlayer, nextRequirement,newRemainingCardRequirements,newAvailableExchangableItems,newTradeEffects,uniqueCostings,newCostings);
 			}
 		}
 	}

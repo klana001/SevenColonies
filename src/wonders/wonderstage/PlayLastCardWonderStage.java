@@ -20,11 +20,6 @@ public class PlayLastCardWonderStage extends WonderStage implements Effect
 	{
 		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
 	}
-	
-	public PlayLastCardWonderStage(PlayLastCardWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-	}
 
 	@Override
 	public String getName()

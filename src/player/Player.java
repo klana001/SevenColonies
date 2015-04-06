@@ -1,6 +1,7 @@
 package player;
 
 import game.Action;
+import game.GameState;
 import interfaces.GameElement;
 
 import java.util.ArrayList;
@@ -8,11 +9,13 @@ import java.util.Collection;
 import java.util.List;
 
 import common.Utilities;
+import classes.Card;
 import classes.Hand;
 import wonders.Wonder;
 
 abstract public class Player
 {
+	private String name;
 	private Wonder wonder;
 	private Hand hand;
 	private int leftNeighbourId;
@@ -25,28 +28,15 @@ abstract public class Player
 
 	abstract public Wonder chooseWonder(Collection<Wonder> wonders);
 	
-	public Player()
+	public Player(String name)
 	{
-	}
-	
-	// copy constructor
-	public Player(Player source)
-	{
-		wonder = new Wonder(source.wonder);
-		hand = new Hand(source.hand);
-		leftNeighbourId = source.leftNeighbourId;
-		rightNeighbourId = source.rightNeighbourId;
-		gameElements = Utilities.cloneList(source.gameElements);
-		gameElementsNewThisAge = Utilities.cloneList(source.gameElementsNewThisAge);
-		action = Utilities.cloneObject(source.action);
-		coins = source.getCoins();
-		setId(source.getId());
+		this.name= name;
 	}
 
 	public void setWonder(Wonder chosenWonder)
 	{
 		this.wonder= chosenWonder;
-		
+		gameElements.addAll(wonder.getWonderBenefit());
 	}
 
 	public void setHand(Hand hand)
@@ -94,10 +84,10 @@ abstract public class Player
 		return this.gameElementsNewThisAge;
 	}
 
+	// does this player have cards to play?
 	public boolean canPerformMoreActions()
 	{
-		throw new RuntimeException("TODO");
-//		return false;
+		return hand.size()>1;
 	}
 
 	abstract public Action chooseAction(List<Action> actionCandidates);
@@ -134,5 +124,31 @@ abstract public class Player
 		this.id = id;
 	}
 
+	public void placeCard(GameState gameState, Card card)
+	{
+		if (!getHand().remove(card))
+		{
+			throw new RuntimeException("tried to remove card: "+card+ " from player: "+this+" however player did not have the card in hand.");
+		}
+		
+		addGameElement(card);
+	}
+	
+	private void addGameElement(GameElement element)
+	{
+		gameElementsNewThisAge.add(element);
+		gameElements.add(element);
+	}
 
+	public String getName()
+	{
+		return name;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return getName();
+	}
+	
 }

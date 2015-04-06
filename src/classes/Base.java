@@ -19,8 +19,4 @@ import interfaces.GameElement;
 			return false;
 		}
 		
-		public int compareTo(Object o)
-		{
-			return 0;
-		}
 	}

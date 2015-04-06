@@ -1,9 +1,13 @@
 package effects.rawmaterials;
 
+import interfaces.ExchangableItem;
+
 import java.util.Arrays;
 import java.util.Collection;
 
+import player.Player;
 import cards.IRawMaterial;
+import cards.IRawMaterial.Type;
 import cards.rawmaterials.Clay;
 import cards.rawmaterials.Ore;
 import cards.rawmaterials.Stone;
@@ -19,13 +23,6 @@ public class WildRawMaterial implements Effect, IRawMaterial
 	{
 		super();
 		// default constructor
-	}
-
-	
-	public WildRawMaterial(WildRawMaterial source)
-	{
-		super();
-		// default copy constructor
 	}
 	
 
@@ -67,5 +64,20 @@ public class WildRawMaterial implements Effect, IRawMaterial
 		
 	}
 
-	
+	@Override
+	public boolean equivilent(ExchangableItem otherItem, Player currentPlayer)
+	{
+		if (otherItem instanceof IRawMaterial)
+		{
+			IRawMaterial otherMaterial = (IRawMaterial) otherItem;
+			for (Type type : getRawMaterialType())
+			{
+				if (otherMaterial.getRawMaterialType().contains(type))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

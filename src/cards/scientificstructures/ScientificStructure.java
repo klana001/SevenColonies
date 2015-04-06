@@ -17,26 +17,18 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import classes.Card;
+import classes.NamedCard;
 import common.Utilities;
 import cards.IScientificStructure;
 import game.Age;
 import interfaces.ExchangableItem;
 
-public class ScientificStructure extends Card implements IScientificStructure
+public class ScientificStructure extends NamedCard implements IScientificStructure
 {
 	private List<Type> type;
 	private String name;
 	private List<ExchangableItem> cost;
 
-	public ScientificStructure(ScientificStructure source)
-	{
-		super(source.getAge());
-		this.type=new ArrayList<Type>(source.type);
-		this.name=new String(source.name);
-		this.cost=Utilities.cloneList(source.cost);
-		// default copy constructor	
-	}
-	
 	public ScientificStructure(Age age,List<Type> type,String name,List<ExchangableItem> cost)
 	{
 		super(age);

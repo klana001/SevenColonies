@@ -1,17 +1,15 @@
 package cards.rawmaterials;
 
+import interfaces.ExchangableItem;
+
 import java.util.Arrays;
 import java.util.Collection;
 
+import player.Player;
 import cards.IRawMaterial;
 
 public class Ore implements IRawMaterial
 {
-	public Ore(Ore source)
-	{
-		super();
-		// default copy constructor	
-	}
 	
 	public Ore()
 	{
@@ -46,5 +44,19 @@ public class Ore implements IRawMaterial
 	public String toString()
 	{
 		return getName();
+	}
+	
+	@Override
+	public boolean equivilent(ExchangableItem otherItem, Player currentPlayer)
+	{
+		if (otherItem instanceof IRawMaterial)
+		{
+			IRawMaterial otherMaterial = (IRawMaterial) otherItem;
+			for (IRawMaterial.Type type : getRawMaterialType())
+			{
+				if (otherMaterial.getRawMaterialType().contains(type)) return true;
+			}
+		}
+		return false;
 	}
 }

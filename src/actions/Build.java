@@ -1,5 +1,6 @@
 package actions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import common.Utilities;
@@ -7,7 +8,10 @@ import classes.Card;
 import classes.CostedOwnedExchangableItem;
 import player.Player;
 import game.Action;
+import game.BankPayment;
 import game.GameState;
+import game.Payment;
+import game.TradePayment;
 
 public class Build extends Action
 {
@@ -20,18 +24,12 @@ public class Build extends Action
 		this.costedOwnedExchangeableItems=costedOwnedExchangeableItems;
 		this.setCard(card);
 	}
-	
-	public Build(Build source)
-	{
-		super(source.getId(), Utilities.cloneObject(source.getOwner()));
-		costedOwnedExchangeableItems = Utilities.cloneList(costedOwnedExchangeableItems);
-		setCard(Utilities.cloneObject(source.getCard()));
-	}
 
 	@Override
-	public void setData(Object data) throws Exception
+	public void setData(Object... data) throws Exception
 	{
-		// TODO Auto-generated method stub
+		costedOwnedExchangeableItems=(List<CostedOwnedExchangableItem>) data[0];
+		card = (Card)data[1];
 
 	}
 
@@ -39,7 +37,15 @@ public class Build extends Action
 	public void perform(GameState olsGamestate, GameState newGameState) throws Exception
 	{
 		// TODO Auto-generated method stub
-		throw new RuntimeException("TBD");
+		Player player=newGameState.getPlayer(owner.getId());
+		int coins = player.getCoins();
+		
+		for (CostedOwnedExchangableItem  item : costedOwnedExchangeableItems)
+		{
+			coins+=item.getCost();
+		}
+
+		player.placeCard(newGameState,card);
 	}
 	
 	@Override
@@ -53,8 +59,9 @@ public class Build extends Action
 			result+="\t\t"+item.getItem().getName();
 			if (item.getOwner().getId()!=owner.getId())
 			{
-				result+=" + "+item.getCost()+" coin for trading with neighbour: "+owner;
+				result+=" + "+item.getCost()+" coin for trading with neighbour: "+item.getOwner();
 			}
+			result+="\n";
 		}
 		result+="\n";
 		
@@ -69,6 +76,31 @@ public class Build extends Action
 	public void setCard(Card card)
 	{
 		this.card = card;
+	}
+
+	@Override
+	public Object[] getData()
+	{
+		return new Object[]{costedOwnedExchangeableItems,card};
+	}
+
+	@Override
+	public List<Payment> getPayments()
+	{
+		List<Payment> results = new ArrayList<Payment>();
+		
+		for (CostedOwnedExchangableItem item : costedOwnedExchangeableItems)
+		{
+			if (item.getOwner().getId()!=getOwner().getId())
+			{
+				results.add(new TradePayment(item.getCost(), item.getOwner()));
+			}
+			else if (item.getCost()!=0)
+			{
+				results.add(new BankPayment(item.getCost()));
+			}
+		}
+		return results;
 	}
 
 }

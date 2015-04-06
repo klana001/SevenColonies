@@ -19,26 +19,29 @@ public class CostedOwnedExchangableItem
 		this.owner = owner;
 	}
 	
-	public CostedOwnedExchangableItem(CostedOwnedExchangableItem source)
-	{
-		this.setItem(Utilities.cloneObject(source.getItem()));
-		this.owner = Utilities.cloneObject(source.owner);
-		this.cost = source.cost;
-	}
 	
 	@Override 
 	public int hashCode()
 	{
-		return (getItem().getName().hashCode()+owner.hashCode())*(cost*113);
+		return (getItem().getName().hashCode()+owner.getName().hashCode())*(cost*113);
 	}
 	@Override
 	public boolean equals(Object other)
 	{
+//		throw new RuntimeException();
 		if (!(other instanceof CostedOwnedExchangableItem)) return false;
 		CostedOwnedExchangableItem otherCostedOwnedExchangableItem = (CostedOwnedExchangableItem) other;
 		return cost==otherCostedOwnedExchangableItem.cost &&
-			   getItem().equals(otherCostedOwnedExchangableItem.getItem()) &&
-			   owner.equals(otherCostedOwnedExchangableItem.owner);
+			   getItem().equivilent(otherCostedOwnedExchangableItem.getItem(), owner) &&
+			   owner.getId()==otherCostedOwnedExchangableItem.owner.getId();
+	}
+	
+	public boolean equivilent(CostedOwnedExchangableItem otherCostedOwnedExchangableItem)
+	{
+		if (otherCostedOwnedExchangableItem==null) return false;
+		return cost==otherCostedOwnedExchangableItem.cost &&
+			   getItem().equivilent(otherCostedOwnedExchangableItem.getItem(), owner) &&
+			   owner.getId()==otherCostedOwnedExchangableItem.owner.getId();
 	}
 
 	public ExchangableItem getItem()
@@ -59,5 +62,10 @@ public class CostedOwnedExchangableItem
 	public Player getOwner()
 	{
 		return owner;
+	}
+	
+	public String toString()
+	{
+		return ""+this.getClass().getName()+"@"+Integer.toHexString(System.identityHashCode(this))+":\n\tItem: "+item+"\n\tCost: "+cost+"\n\tOwner: "+owner+"\n";
 	}
 }

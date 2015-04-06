@@ -22,11 +22,6 @@ public class CopyGuildFromOneNeighbourWonderStage extends WonderStage implements
 	{
 		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
 	}
-	
-	public CopyGuildFromOneNeighbourWonderStage(CopyGuildFromOneNeighbourWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-	}
 
 	@Override
 	public String getName()

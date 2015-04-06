@@ -33,5 +33,10 @@ abstract public class WonderStage extends Base implements Purchasable
 		return cost;
 	}
 
+	@Override
+	public int compareTo(Object arg0)
+	{
+		return this.getClass().isInstance(arg0)?0:-1;
+	}
 	
 }

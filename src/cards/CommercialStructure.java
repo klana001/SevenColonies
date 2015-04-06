@@ -16,13 +16,14 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import classes.Card;
+import classes.NamedCard;
 import common.Utilities;
 import effects.Effect;
 import game.Age;
 import interfaces.ExchangableItem;
 
 
-public class CommercialStructure extends Card
+public class CommercialStructure extends NamedCard
 {
 	private List<ExchangableItem> cost;
 	private String name;
@@ -34,14 +35,6 @@ public class CommercialStructure extends Card
 		this.cost=cost;
 		this.name=name;
 		this.effect=effect;
-	}
-	
-	public CommercialStructure(CommercialStructure source)
-	{
-		super(source.getAge());
-		cost = Utilities.cloneList(source.cost);
-		effect = Utilities.cloneList(source.effect);
-		name = new String (source.name);
 	}
 
 	public Colour getColour()

@@ -19,12 +19,6 @@ public class CoinWonderStage extends WonderStage implements Money
 		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),coin);
 	}
 	
-	public CoinWonderStage(CoinWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-		coin = new Coin(source.getCoin());
-	}
-	
 	public CoinWonderStage(List<ExchangableItem> cost, Coin coin)
 	{
 		super(cost);

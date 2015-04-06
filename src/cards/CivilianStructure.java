@@ -16,26 +16,17 @@ import org.json.simple.parser.ParseException;
 
 import common.Utilities;
 import classes.Card;
+import classes.NamedCard;
 import game.Age;
 import interfaces.ExchangableItem;
 import interfaces.UpgradableFrom;
 
-public class CivilianStructure extends Card implements UpgradableFrom
+public class CivilianStructure extends NamedCard implements UpgradableFrom
 {
 	private int points;
 	private List<ExchangableItem> cost;
 	private String civilianStructureName;
 	private List<Card> upgradableFrom;
-	
-	public CivilianStructure(CivilianStructure source)
-	{
-		super(source.getAge());
-		this.points = source.points;
-		this.cost=Utilities.cloneList(source.cost);
-		this.civilianStructureName=new String(source.civilianStructureName);
-		this.upgradableFrom=Utilities.cloneList(source.upgradableFrom);
-	}
-
 	
 	public CivilianStructure(Age age, int points, List<ExchangableItem> cost, String civilianStructureName, List<Card> upgradableFrom)
 	{

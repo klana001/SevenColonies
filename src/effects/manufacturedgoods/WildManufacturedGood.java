@@ -2,10 +2,16 @@ package effects.manufacturedgoods;
 
 
 
+import interfaces.ExchangableItem;
+
 import java.util.Arrays;
 import java.util.Collection;
 
+import player.Player;
+import classes.Coin;
 import cards.IManufacturedGood;
+import cards.IManufacturedGood;
+import cards.IManufacturedGood.Type;
 import cards.manufacturedgoods.Glass;
 import cards.manufacturedgoods.Papyrus;
 import cards.manufacturedgoods.Textile;
@@ -20,13 +26,6 @@ public class WildManufacturedGood implements Effect, IManufacturedGood
 	{
 		super();
 		// default constructor
-	}
-
-	
-	public WildManufacturedGood(WildManufacturedGood source)
-	{
-		super();
-		// default copy constructor
 	}
 
 	@Override
@@ -64,6 +63,23 @@ public class WildManufacturedGood implements Effect, IManufacturedGood
 	{
 		throw new RuntimeException("no effect!");
 		
+	}
+	
+	@Override
+	public boolean equivilent(ExchangableItem otherItem, Player currentPlayer)
+	{
+		if (otherItem instanceof IManufacturedGood)
+		{
+			IManufacturedGood otherMaterial = (IManufacturedGood) otherItem;
+			for (Type type : getManufacturedGoodType())
+			{
+				if (otherMaterial.getManufacturedGoodType().contains(type))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }

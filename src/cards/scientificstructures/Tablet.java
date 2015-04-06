@@ -8,12 +8,7 @@ import cards.IScientificStructure;
 
 public class Tablet implements IScientificStructure
 {
-	public Tablet(Tablet source)
-	{
-		super();
-		// default copy constructor	
-	}
-	
+
 	public Tablet()
 	{
 

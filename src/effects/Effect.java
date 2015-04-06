@@ -11,7 +11,7 @@ public interface Effect
 		AT_END_OF_GAME,
 		ONCE_PER_AGE,
 		EVERY_TURN,
-		EVERY_TRADE
+		EVERY_TRADE, TAKE_FROM_BANK
 	}
 	
 	public void performEffect(GameState gameState, Object... data);

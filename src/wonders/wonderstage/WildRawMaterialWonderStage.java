@@ -5,6 +5,7 @@ import interfaces.ExchangableItem;
 import java.util.Arrays;
 import java.util.Collection;
 
+import player.Player;
 import common.NoCost;
 import common.Utilities;
 import cards.IRawMaterial;
@@ -23,10 +24,7 @@ public class WildRawMaterialWonderStage extends WonderStage implements IRawMater
 		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
 	}
 	
-	public WildRawMaterialWonderStage(WildRawMaterialWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-	}
+
 
 	@Override
 	public String getName()
@@ -44,6 +42,12 @@ public class WildRawMaterialWonderStage extends WonderStage implements IRawMater
 	public Collection<IRawMaterial> getRawMaterials()
 	{
 		return wildRawMaterial.getRawMaterials();
+	}
+
+	@Override
+	public boolean equivilent(ExchangableItem otherItem, Player currentPlayer)
+	{
+		return wildRawMaterial.equivilent(otherItem, null);
 	}
 
 }

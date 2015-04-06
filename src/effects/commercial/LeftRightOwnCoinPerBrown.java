@@ -8,11 +8,6 @@ import game.GameState;
 
 public class LeftRightOwnCoinPerBrown extends CoinsPerType
 {
-	public LeftRightOwnCoinPerBrown(LeftRightOwnCoinPerBrown source)
-	{
-		super(1, RawMaterial.class);
-		// default copy constructor
-	}
 	public LeftRightOwnCoinPerBrown()
 	{
 		super(1, RawMaterial.class);

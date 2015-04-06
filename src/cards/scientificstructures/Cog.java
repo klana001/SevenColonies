@@ -10,12 +10,6 @@ import cards.rawmaterials.WoodOrStone;
 public class Cog implements IScientificStructure
 {
 
-	public Cog(Cog source)
-	{
-		super();
-		// default copy constructor	
-	}
-	
 	public Cog()
 	{
 

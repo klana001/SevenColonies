@@ -16,16 +16,18 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import player.Player;
 import classes.Card;
+import classes.NamedCard;
 import common.Utilities;
 import cards.IManufacturedGood;
-import cards.IRawMaterial.Type;
+import cards.IRawMaterial;
 import cards.rawmaterials.RawMaterial;
 import game.Age;
 import interfaces.ExchangableItem;
 
 
-public class ManufacturedGood extends Card implements ExchangableItem,IManufacturedGood
+public class ManufacturedGood extends NamedCard implements ExchangableItem,IManufacturedGood
 {
 	private List<Type> type;
 	private List<ExchangableItem> cost;
@@ -37,14 +39,6 @@ public class ManufacturedGood extends Card implements ExchangableItem,IManufactu
 		this.type=type;
 		this.cost=cost;
 		this.name=name;
-	}
-	
-	public ManufacturedGood(ManufacturedGood source)
-	{
-		super(source.getAge());
-		type = new ArrayList<Type>(source.type);
-		cost = Utilities.cloneList(source.cost);
-		name = new String(source.name);
 	}
 
 	public Colour getColour()
@@ -72,6 +66,11 @@ public class ManufacturedGood extends Card implements ExchangableItem,IManufactu
 		JSONObject jsonMap=(JSONObject) parser.parse(new BufferedReader(new InputStreamReader(is)));
 		ArrayList<JSONObject> manufacturedGoodJsonList = (ArrayList<JSONObject>) jsonMap.get(age.toString());
 		Collection<ManufacturedGood> manufacturedGoodsList = new ArrayList<ManufacturedGood>();
+		
+		if (manufacturedGoodJsonList==null)
+		{
+			throw new RuntimeException("No "+age.toString()+" entry in data/manufacturedGoods.json" );
+		}
 		
 		for (JSONObject manufacturedGoodEntryJson : manufacturedGoodJsonList)
 		{
@@ -133,5 +132,19 @@ public class ManufacturedGood extends Card implements ExchangableItem,IManufactu
 	public String toString()
 	{
 		return getName();
+	}
+
+	@Override
+	public boolean equivilent(ExchangableItem otherItem, Player currentPlayer)
+	{
+		if (otherItem instanceof IManufacturedGood)
+		{
+			IManufacturedGood otherManufacturedGood = (IManufacturedGood) otherItem;
+			for (IManufacturedGood.Type type : getManufacturedGoodType())
+			{
+				if (otherManufacturedGood.getManufacturedGoodType().contains(type)) return true;
+			}
+		}
+		return false;
 	}
 }

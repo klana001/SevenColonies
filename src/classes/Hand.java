@@ -11,11 +11,4 @@ public class Hand extends ArrayList<Card>
 	{
 		super();
 	}
-
-	public Hand(Hand source)
-	{
-		super(source.size());
-		addAll(Utilities.cloneList(source));
-	}
-	
 }

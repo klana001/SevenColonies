@@ -23,11 +23,7 @@ public class CopyRightAgeTwoWonderStage extends WonderStage implements Effect
 		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
 	}
 
-	public CopyRightAgeTwoWonderStage(CopyRightAgeTwoWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-	}
-	
+
 	@Override
 	public String getName()
 	{

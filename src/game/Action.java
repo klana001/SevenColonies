@@ -1,5 +1,7 @@
 package game;
 
+import java.util.List;
+
 import player.Player;
 
 abstract public class Action
@@ -7,8 +9,7 @@ abstract public class Action
 	private int id;
 	public Player owner;
 	private int priority;
-	
-	
+		
 	public int getId()
 	{
 		return id;
@@ -22,7 +23,8 @@ abstract public class Action
 		this.owner=owner;
 	}
 	
-	abstract public void setData(Object data) throws Exception;
+	abstract public void setData(Object... data) throws Exception;
+	abstract public Object[] getData();
 	
 
 	abstract public void perform(GameState gamestate, GameState newGameState) throws Exception;
@@ -41,6 +43,12 @@ abstract public class Action
 	{
 		return owner;
 	}
+
+	/**
+	 * Returns the list of payements required to be performed for this action
+	 * @return
+	 */
+	abstract public List<Payment> getPayments();
 	
 	
 	

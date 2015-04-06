@@ -19,11 +19,7 @@ public class BuildOneFreeBuildingEachAgeWonderStage extends WonderStage implemen
 		super(cost);
 	}
 	
-	public BuildOneFreeBuildingEachAgeWonderStage(BuildOneFreeBuildingEachAgeWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-	}
-	
+
 	public BuildOneFreeBuildingEachAgeWonderStage()
 	{
 		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));

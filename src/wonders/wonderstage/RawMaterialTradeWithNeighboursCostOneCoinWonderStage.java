@@ -23,10 +23,6 @@ public class RawMaterialTradeWithNeighboursCostOneCoinWonderStage extends Wonder
 		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
 	}
 	
-	public RawMaterialTradeWithNeighboursCostOneCoinWonderStage(RawMaterialTradeWithNeighboursCostOneCoinWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-	}
 
 	@Override
 	public String getName()

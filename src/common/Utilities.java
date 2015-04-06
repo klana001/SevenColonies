@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 
 import org.json.simple.JSONObject;
 
+import com.rits.cloning.Cloner;
+
 
 public class Utilities
 {
@@ -149,109 +151,10 @@ public class Utilities
 		return list;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static <T> List<T> cloneList(Collection<T> list) 
-	{
-		if (list==null) return null;
-		ArrayList<T> newList =new ArrayList<T>();
-		for (T element : list)
-		{
-			newList.add(cloneObject(element));
-		}
-		return newList;
-	}
-	
-//	@SuppressWarnings("unchecked")
-//	public static <T> List<T> cloneList(List<T> list) 
-//	{
-//		ArrayList<T> newList =new ArrayList<T>();
-//		for (T element : list)
-//		{
-//			try
-//			{
-//				newList.add(cloneObject(element));
-//			}
-//			catch (Exception e)
-//			{
-//				throw new RuntimeException(e);
-//			}
-//		}
-//		return newList;
-//	}
-	
-	static Map<Object,Integer> objectIds = new HashMap<Object, Integer>();
-	static Map<Integer,Object> objectIdNewObjectMap = new HashMap<Integer, Object>();
-	static boolean isRoot=true; 
-	static int objectId=0;
-	
-	
 	public static <T> T cloneObject(T object)
 	{
-		
-		boolean isRoot=Utilities.isRoot;
-		Utilities.isRoot=Utilities.isRoot && false;
-		
-		try
-		{
-			try
-			{
-				if (object == null) return null;
-				
-				if (objectIds.keySet().contains(object))
-				{
-					T result = (T) objectIdNewObjectMap.get(objectIds.get(object));
-					
-					if (result==null)
-					{
-						result = (T) object.getClass().getConstructor(object.getClass()).newInstance(object);
-						objectIdNewObjectMap.put(objectIds.get(object),result);
-					}
-					return result;
-				}
-				int id = objectId++;
-				objectIds.put(object, id);
-				T result = (T) object.getClass().getConstructor(object.getClass()).newInstance(object);
+		Cloner cloner = new Cloner();
+		return cloner.deepClone(object);
+	}
 
-				objectIdNewObjectMap.put(id,result);
-				return result;
-			}
-			catch (Exception e)
-			{
-				throw new RuntimeException(e);
-			}
-		}
-		finally
-		{
-			if (isRoot)
-			{
-				objectId=0;
-				objectIds.clear();
-				objectIdNewObjectMap.clear();
-				Utilities.isRoot=true;
-			}
-					
-		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static <T,U> Map<T,U> cloneMap(Map<T,U> map) 
-	{
-		Map<T,U> newMap=new HashMap<T,U>();
-		for (T key : map.keySet())
-		{
-			try
-			{
-				T newKey= cloneObject(key);
-				U value = map.get(key);
-				U newValue= cloneObject(value);
-				newMap.put(newKey, newValue);
-			}
-			catch (Exception e)
-			{
-				throw new RuntimeException(e);
-			}
-		}
-		return newMap;
-	}
-	
 }

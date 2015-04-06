@@ -12,13 +12,6 @@ public class TradeManufacturedGoodsForOneCoin implements Effect
 		// default constructor
 	}
 
-	
-	public TradeManufacturedGoodsForOneCoin(TradeManufacturedGoodsForOneCoin source)
-	{
-		super();
-		// default copy constructor
-	}
-
 	@Override
 	public void performEffect(GameState gameState, Object... data)
 	{

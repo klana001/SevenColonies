@@ -13,13 +13,6 @@ public class RightTradeRawMaterialsForOneCoin implements Effect
 		// default constructor
 	}
 
-	
-	public RightTradeRawMaterialsForOneCoin(RightTradeRawMaterialsForOneCoin source)
-	{
-		super();
-		// default copy constructor
-	}
-
 	@Override
 	public void performEffect(GameState gameState, Object... data)
 	{

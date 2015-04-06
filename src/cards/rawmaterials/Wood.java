@@ -1,17 +1,15 @@
 package cards.rawmaterials;
 
+import interfaces.ExchangableItem;
+
 import java.util.Arrays;
 import java.util.Collection;
 
+import player.Player;
 import cards.IRawMaterial;
 
 public class Wood implements IRawMaterial
 {
-	public Wood(Wood source)
-	{
-		super();
-		// default copy constructor	
-	}
 	
 	public Wood()
 	{
@@ -46,5 +44,19 @@ public class Wood implements IRawMaterial
 	public String toString()
 	{
 		return getName();
+	}
+	
+	@Override
+	public boolean equivilent(ExchangableItem otherItem, Player currentPlayer)
+	{
+		if (otherItem instanceof IRawMaterial)
+		{
+			IRawMaterial otherMaterial = (IRawMaterial) otherItem;
+			for (IRawMaterial.Type type : getRawMaterialType())
+			{
+				if (otherMaterial.getRawMaterialType().contains(type)) return true;
+			}
+		}
+		return false;
 	}
 }

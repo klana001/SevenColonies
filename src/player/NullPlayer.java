@@ -7,18 +7,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import actions.DiscardForThreeCoins;
 import wonders.Wonder;
 
 public class NullPlayer extends Player
 {
-	public NullPlayer()
+	public NullPlayer(String name)
 	{
-		
-	}
-	
-	public NullPlayer(NullPlayer source)
-	{
-		super(source);
+		super(name);
 	}
 	
 	@Override
@@ -35,6 +31,13 @@ public class NullPlayer extends Player
 		actionCandidates.stream().forEach(a->System.out.println(a));
 		
 		Action action = actionCandidates.get(Game.rand.nextInt(actionCandidates.size()));
+		
+		if (action instanceof DiscardForThreeCoins)
+		{
+			((DiscardForThreeCoins) action).setCardToDiscard(getHand().get(Game.rand.nextInt(getHand().size())));
+		}
+		
+		
 		
 		System.out.println("Action chosen: "+action);
 		

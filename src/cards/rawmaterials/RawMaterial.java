@@ -16,14 +16,16 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import player.Player;
 import classes.Card;
+import classes.NamedCard;
 import cards.IRawMaterial;
 import common.Utilities;
 import game.Age;
 import interfaces.ExchangableItem;
 
 
-public class RawMaterial extends Card implements ExchangableItem,IRawMaterial
+public class RawMaterial extends NamedCard implements ExchangableItem,IRawMaterial
 {
 	private List<Type> type;
 	private List<ExchangableItem> cost;
@@ -36,15 +38,6 @@ public class RawMaterial extends Card implements ExchangableItem,IRawMaterial
 		this.cost=cost;
 		this.name=name;
 	}
-	
-	public RawMaterial(RawMaterial source)
-	{
-		super(source.getAge());
-		type = new ArrayList<Type>(source.type);
-		cost = Utilities.cloneList(source.cost);
-		name = new String(source.name);
-	}
-
 
 	public Colour getColour()
 	{
@@ -71,6 +64,11 @@ public class RawMaterial extends Card implements ExchangableItem,IRawMaterial
 		JSONObject jsonMap=(JSONObject) parser.parse(new BufferedReader(new InputStreamReader(is)));
 		ArrayList<JSONObject> rawMaterialJsonList = (ArrayList<JSONObject>) jsonMap.get(age.toString());
 		Collection<RawMaterial> rawMaterialsList = new ArrayList<RawMaterial>();
+		
+		if (rawMaterialJsonList==null)
+		{
+			throw new RuntimeException("No "+age.toString()+" entry in data/rawMaterials.json" );
+		}
 		
 		for (JSONObject rawMaterialEntryJson : rawMaterialJsonList)
 		{
@@ -132,5 +130,19 @@ public class RawMaterial extends Card implements ExchangableItem,IRawMaterial
 	public String toString()
 	{
 		return getName();
+	}
+	
+	@Override
+	public boolean equivilent(ExchangableItem otherItem, Player currentPlayer)
+	{
+		if (otherItem instanceof IRawMaterial)
+		{
+			IRawMaterial otherMaterial = (IRawMaterial) otherItem;
+			for (IRawMaterial.Type type : getRawMaterialType())
+			{
+				if (otherMaterial.getRawMaterialType().contains(type)) return true;
+			}
+		}
+		return false;
 	}
 }

@@ -19,11 +19,6 @@ public class BuildDiscardedBuildingWonderStage extends WonderStage implements Ef
 		super(cost);
 	}
 	
-	public BuildDiscardedBuildingWonderStage(BuildDiscardedBuildingWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-	}
-	
 	public BuildDiscardedBuildingWonderStage()
 	{
 		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
@@ -46,6 +41,7 @@ public class BuildDiscardedBuildingWonderStage extends WonderStage implements Ef
 	{
 		return ActivationPoint.INSTANTLY;
 	}
+
 
 	
 }

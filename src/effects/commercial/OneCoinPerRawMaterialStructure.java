@@ -6,11 +6,6 @@ import effects.CoinsPerType;
 
 public class OneCoinPerRawMaterialStructure extends CoinsPerType
 {
-	public OneCoinPerRawMaterialStructure(OneCoinPerRawMaterialStructure source)
-	{
-		super(1, RawMaterial.class);
-		// default copy constructor
-	}
 
 	public OneCoinPerRawMaterialStructure()
 	{

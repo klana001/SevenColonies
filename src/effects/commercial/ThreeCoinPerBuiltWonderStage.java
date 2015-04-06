@@ -17,12 +17,7 @@ public class ThreeCoinPerBuiltWonderStage implements Effect
 		// default constructor
 	}
 
-	
-	public ThreeCoinPerBuiltWonderStage(ThreeCoinPerBuiltWonderStage source)
-	{
-		super();
-		// default copy constructor
-	}
+
 	
 	@Override
 	public void performEffect(GameState gameState, Object... data)

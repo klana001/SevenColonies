@@ -37,36 +37,38 @@ public class Game
 		gameState.setWonders(new ArrayList<Wonder>(Wonder.constructWonders()));
 		Collections.shuffle(gameState.getWonders(), rand);
 		
-		List<Player> players = new ArrayList<Player>();
-		players.add(new NullPlayer());
-		players.add(new NullPlayer());
-		players.add(new NullPlayer());
-		Collections.shuffle(players);
-		
-		
-		gameState.setPlayers(players);
+		{
+			List<Player> players = new ArrayList<Player>();
+			players.add(new NullPlayer("Player A"));
+			players.add(new NullPlayer("Player B"));
+			players.add(new NullPlayer("Player C"));
+			Collections.shuffle(players);
+			
+			
+			gameState.setPlayers(players);
+		}
 		
 		// assign neighbours
-		for (int i=0;i<players.size();i++)
+		for (int i=0;i<gameState.getPlayers().size();i++)
 		{
-			Player currentPlayer = players.get(i);
+			Player currentPlayer = gameState.getPlayers().get(i);
 			currentPlayer.setId(i);
 
-			int leftNeighbourIndex=(i+players.size()-1)%players.size();
-			int rightNeighbourIndex=(i+players.size()+1)%players.size();
+			int leftNeighbourIndex=(i+gameState.getPlayers().size()-1)%gameState.getPlayers().size();
+			int rightNeighbourIndex=(i+gameState.getPlayers().size()+1)%gameState.getPlayers().size();
 			
 			currentPlayer.setLeftNeighbourId(leftNeighbourIndex);
 			currentPlayer.setRightNeighbourId(rightNeighbourIndex);
 		}
 		
 		//set starting money
-		players.stream().forEach(p->p.setCoins(3));
+		gameState.getPlayers().stream().forEach(p->p.setCoins(3));
 		
 
 		// let players select their wonder
-		int wondersPerPlayer = gameState.getWonders().size()/players.size();
+		int wondersPerPlayer = gameState.getWonders().size()/gameState.getPlayers().size();
 		int index=0;
-		for (Player player : players)
+		for (Player player : gameState.getPlayers())
 		{
 			List<Wonder> wonderCandidates = gameState.getWonders().subList(index, (index+=wondersPerPlayer));
 			final Wonder playerChosenWonder = player.chooseWonder(wonderCandidates);
@@ -107,12 +109,12 @@ public class Game
 			Collections.shuffle(currentAgeCards, rand);
 			ArrayList<Card> remainingCards = new ArrayList<Card>(currentAgeCards);
 			
-			System.out.println("AGE1");
+	
 			currentAgeCards.stream().forEach(c-> System.out.println(c.getName()));
 			
-			int cardsPerPlayer = currentAgeCards.size()/players.size();
+			int cardsPerPlayer = currentAgeCards.size()/gameState.getPlayers().size();
 			
-			for (Player player : players)
+			for (Player player : gameState.getPlayers())
 			{
 				Hand hand = new Hand();
 				
@@ -127,14 +129,18 @@ public class Game
 			
 			// perform rounds
 			
+			int round=0;
 			gameState.setRound(Round.FIRST);
 			while (gameState.getRound()!=Round.LAST)
 			{
+				round++;
+				System.out.println("AGE: "+gameState.getAge()+" round: "+round);
 				// all players make their choice of action
-				List<Player> actionablePlayers = players.stream().filter(p->p.getHand().size()>0).collect(Collectors.toList());
+				List<Player> actionablePlayers = gameState.getPlayers().stream().filter(p->p.getHand().size()>0).collect(Collectors.toList());
 				
 				for (Player player : actionablePlayers)
 				{
+					System.out.println("Player: "+player+" with "+player.getCoins()+" coins:");
 					// calculate possible actions;
 					HashMap<Integer,Action> actionCandidates = ActionGenerator.generateActions(player, gameState);
 					
@@ -145,7 +151,8 @@ public class Game
 					
 					if (chosenAction!=null)
 					{
-						player.setAction(playerChosenAction);
+						chosenAction.setData(playerChosenAction.getData());
+						player.setAction(chosenAction);
 					}
 					else
 					{
@@ -164,27 +171,29 @@ public class Game
 					}
 				});
 				
-				GameState newGameState= new GameState(gameState);
+				GameState newGameState= Utilities.cloneObject(gameState);
+				actionablePlayers = newGameState.getPlayers().stream().filter(p->p.getHand().size()>0).collect(Collectors.toList());
 				
 				// update game state based on chosen actions
 				for (Player player : actionablePlayers)
 				{
 					player.getAction().perform(gameState,newGameState);
+					player.getAction().getPayments().forEach(p->p.perform(newGameState, player));
 				}
 				gameState=newGameState;
 				
 				// reset player actions
-				players.stream().forEach(p->p.setAction(null));
+				gameState.getPlayers().stream().forEach(p->p.setAction(null));
 				
 				boolean stillMoreRounds = true;
-				for (Player player : players)
+				for (Player player : gameState.getPlayers())
 				{
 					stillMoreRounds &= player.canPerformMoreActions();
 				}
 				
 				// pass hands on
-				Player firstPlayer = players.get(0);
-				Player lastPlayer = players.get(players.size()-1);
+				Player firstPlayer = gameState.getPlayers().get(0);
+				Player lastPlayer = gameState.getPlayers().get(gameState.getPlayers().size()-1);
 				Hand firstPlayerHand = (Hand) firstPlayer.getHand();
 				Hand lastPlayerHand = (Hand) lastPlayer.getHand();
 				
@@ -223,7 +232,7 @@ public class Game
 				if (stillMoreRounds==false)
 				{
 					// see if there are any end of age effect to apply.
-					for (Player player : players)
+					for (Player player : gameState.getPlayers())
 					{
 						Utilities.filterElements(player.getGetGameElementsNewThisAge(), Effect.class).stream().filter(e-> e.getActivationPoint()==ActivationPoint.AT_END_OF_AGE).forEach(e->e.performEffect(finalGameState, null));
 					}

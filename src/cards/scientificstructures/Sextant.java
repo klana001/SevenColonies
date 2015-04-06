@@ -8,12 +8,6 @@ import cards.IScientificStructure;
 
 public class Sextant implements IScientificStructure
 {
-	public Sextant(Sextant source)
-	{
-		super();
-		// default copy constructor	
-	}
-	
 	public Sextant()
 	{
 

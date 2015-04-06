@@ -23,13 +23,7 @@ public class PointWonderStage extends WonderStage implements Scoreable
 		this.score=score;
 	}
 	
-	public PointWonderStage(PointWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-		score=source.score;
-	}
-	
-	
+
 	@Override
 	public int calculateScore()
 	{

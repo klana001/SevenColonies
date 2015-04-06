@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import common.Utilities;
 import classes.Card;
 import classes.Round;
+import effects.Effect;
+import effects.Effect.ActivationPoint;
 import effects.rawmaterials.WildRawMaterial;
 import player.Player;
 import wonders.Wonder;
@@ -23,7 +26,7 @@ public class GameState
 	private List<Wonder> wonders;
 	private Age age;
 	private Round round;
-	private List<Card> discards;
+	private List<Card> discards = new ArrayList<Card>();
 //	private Stage stage;
 	private Stage stage;
 	
@@ -33,19 +36,6 @@ public class GameState
 		// default constructor
 	}
 
-	
-	public GameState(GameState source)
-	{
-		super();
-		// default copy constructor
-		players = Utilities.cloneList(source.players);
-		gameElementOwnership = Utilities.cloneMap(source.gameElementOwnership);
-		wonders = Utilities.cloneList(source.wonders);
-		discards = Utilities.cloneList(source.discards);
-		age = source.age;
-		round = source.round;
-		stage = source.stage;
-	}
 	
 	public enum Stage
 	{
@@ -98,6 +88,11 @@ public class GameState
 		this.players=players;
 		
 	}
+	
+	public List<Player> getPlayers()
+	{
+		return players;
+	}
 
 	public void setAge(Age age)
 	{
@@ -110,7 +105,7 @@ public class GameState
 		return age;
 	}
 
-	public void setRound(Round first)
+	public void setRound(Round round)
 	{
 		this.round = round;
 		
@@ -137,4 +132,47 @@ public class GameState
 	{
 		return players.get(playerId);
 	}
+
+	public void takeFromBank(int amount, final Player player)
+	{
+		final List<Effect> bankEffects = new ArrayList<Effect>();
+		players.forEach(
+				p->bankEffects.addAll(
+						Utilities.filterElements(
+								p.getGameElements(),Effect.class
+								).stream().filter(
+										e->e.getActivationPoint()==ActivationPoint.TAKE_FROM_BANK
+										).collect(Collectors.toList()
+								)
+						)
+				);
+		
+		
+		bankEffects.stream().forEach(effect->effect.performEffect(this, player));
+		player.setCoins(player.getCoins()+amount);
+		if (player.getCoins()<0)
+		{
+			player.setCoins(0);
+		}
+	}
+
+	public void discard(Card cardToDiscard,Player player) throws Exception
+	{
+		if (cardToDiscard == null)
+		{
+			throw new Exception("Trying to discard null!");
+		}
+		
+		if (player.getHand().contains(cardToDiscard))
+		{
+			takeFromBank(3,player);
+			player.getHand().remove(cardToDiscard);
+			discards.add(cardToDiscard);
+		}
+		else
+		{
+			throw new Exception("Player "+player+" attempted to discard card: "+cardToDiscard+" however the player did not have the card in the current hand.");
+		}
+	}
+
 }

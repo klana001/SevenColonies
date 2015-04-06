@@ -1,11 +1,14 @@
 package actions;
 
-import common.Utilities;
+import java.util.ArrayList;
+import java.util.List;
 
+import common.Utilities;
 import classes.Card;
 import player.Player;
 import game.Action;
 import game.GameState;
+import game.Payment;
 
 public class DiscardForThreeCoins extends Action
 {
@@ -15,40 +18,29 @@ public class DiscardForThreeCoins extends Action
 	{
 		super(id,player);
 	}
-	
-	public DiscardForThreeCoins(DiscardForThreeCoins source)
-	{
-		super(source.getId(),Utilities.cloneObject(source.getOwner()));
-		cardToDiscard = Utilities.cloneObject(source.cardToDiscard);
-	}
-	
+
 
 	@Override
 	public void perform(GameState oldGamestate, GameState newGameState) throws Exception
 	{
-		if (owner.getHand().contains(cardToDiscard))
-		{
-			if (owner.getGameElements().contains(cardToDiscard))
-			
-			owner.setCoins(owner.getCoins()+3);
-			newGameState.getDiscards().add(cardToDiscard);
-			owner.getGameElements().remove(cardToDiscard);
-		}
-		else
-		{
-			throw new Exception("Player "+owner+" attempted to discard card: "+cardToDiscard+" however the player did not have the card in the current hand.");
-		}
+		newGameState.discard(cardToDiscard,owner);
 	}
 
 	@Override
-	public void setData(Object data) throws Exception
+	public void setData(Object... data) throws Exception
 	{
-		if (!(data instanceof Card))
+		if (!(data[0] instanceof Card))
 		{
-			throw new Exception("Data: "+data+" is not a card.");
+			throw new Exception("Data: "+data[0]+" is not a card.");
 		}
 		
-		cardToDiscard = (Card) data;
+		cardToDiscard = (Card) data[0];
+	}
+	
+	@Override
+	public Object[] getData()
+	{
+		return new Object[]{cardToDiscard};
 	}
 
 	@Override
@@ -57,5 +49,16 @@ public class DiscardForThreeCoins extends Action
 		return "DiscardForThreeGold";
 	}
 
+	public void setCardToDiscard(Card card)
+	{
+		cardToDiscard=card;
+	}
+
+
+	@Override
+	public List<Payment> getPayments()
+	{
+		return new ArrayList<Payment>();
+	}
 
 }

@@ -11,12 +11,6 @@ abstract public class Abstract
 		this.integer=val;
 	}
 	
-	Abstract(Abstract source)
-	{
-		super();
-		integer = source.integer;
-	}
-	
 	public static Abstract create()
 	{
 		final String str = "TEST "+ System.currentTimeMillis();

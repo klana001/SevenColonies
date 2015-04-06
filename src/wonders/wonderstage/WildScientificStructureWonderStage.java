@@ -22,11 +22,6 @@ public class WildScientificStructureWonderStage extends WonderStage implements I
 		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
 	}
 	
-	public WildScientificStructureWonderStage(WildScientificStructureWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-	}
-
 	@Override
 	public String getName()
 	{

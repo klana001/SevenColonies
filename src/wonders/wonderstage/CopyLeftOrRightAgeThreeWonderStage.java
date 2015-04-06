@@ -23,10 +23,6 @@ public class CopyLeftOrRightAgeThreeWonderStage extends WonderStage implements E
 		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
 	}
 
-	public CopyLeftOrRightAgeThreeWonderStage(CopyLeftOrRightAgeThreeWonderStage source)
-	{
-		super(Utilities.cloneList(source.getCost()));
-	}
 	
 	@Override
 	public String getName()

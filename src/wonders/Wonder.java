@@ -52,14 +52,6 @@ public class Wonder implements Scoreable,Military,GameElement,Effect
 		this.wonderBenefit=wonderBenefit;
 	}
 	
-	public Wonder(Wonder source)
-	{
-		super();
-		this.name=source.name;
-		this.wonderStages=Utilities.cloneList(source.wonderStages);
-		this.wonderBenefit=Utilities.cloneList(source.wonderBenefit);
-	}
-	
 	/**
 	 * returns the collection of all known wonders 
 	 * @return

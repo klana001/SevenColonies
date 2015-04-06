@@ -15,13 +15,14 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import classes.Card;
+import classes.NamedCard;
 import common.Military;
 import common.Utilities;
 import effects.Effect;
 import game.Age;
 import interfaces.ExchangableItem;
 
-public class MilitaryStructure extends Card implements Military
+public class MilitaryStructure extends NamedCard implements Military
 {
 	private int strength;
 	private List<ExchangableItem> cost;
@@ -34,14 +35,6 @@ public class MilitaryStructure extends Card implements Military
 		this.strength = strength;
 		this.cost=cost;
 		this.name=name;
-	}
-	
-	public MilitaryStructure(MilitaryStructure source)
-	{
-		super(source.getAge());
-		cost = Utilities.cloneList(source.cost);
-		name = new String (source.name);
-		strength = source.strength;
 	}
 
 	public int calculateMilitary()
@@ -107,5 +100,11 @@ public class MilitaryStructure extends Card implements Military
 	public String getName()
 	{
 		return name;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return getName();
 	}
 }

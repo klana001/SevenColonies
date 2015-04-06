@@ -1,9 +1,14 @@
 package cards.manufacturedgoods;
 
+import interfaces.ExchangableItem;
+
 import java.util.Arrays;
 import java.util.Collection;
 
+import player.Player;
 import cards.IManufacturedGood;
+import cards.IRawMaterial;
+import cards.rawmaterials.RawMaterial;
 
 
 public class Glass implements IManufacturedGood
@@ -12,12 +17,6 @@ public class Glass implements IManufacturedGood
 	{
 		super();
 		// default constructor
-	}
-	
-	public Glass(Glass source)
-	{
-		super();
-		// default copy constructor	
 	}
 	
 	@Override
@@ -48,5 +47,19 @@ public class Glass implements IManufacturedGood
 	public String toString()
 	{
 		return getName();
+	}
+
+	@Override
+	public boolean equivilent(ExchangableItem otherItem, Player currentPlayer)
+	{
+		if (otherItem instanceof IManufacturedGood)
+		{
+			IManufacturedGood otherManufacturedGood = (IManufacturedGood) otherItem;
+			for (IManufacturedGood.Type type : getManufacturedGoodType())
+			{
+				if (otherManufacturedGood.getManufacturedGoodType().contains(type)) return true;
+			}
+		}
+		return false;
 	}
 }

@@ -18,13 +18,7 @@ public class LeftTradeRawMaterialsForOneCoin implements Effect
 		super();
 		// default constructor
 	}
-	
-	public LeftTradeRawMaterialsForOneCoin(LeftTradeRawMaterialsForOneCoin source)
-	{
-		super();
-		// default copy constructor
-	}
-	
+
 
 	@Override
 	public void performEffect(GameState gameState, Object... data)
