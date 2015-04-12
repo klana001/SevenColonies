@@ -1,0 +1,375 @@
+{
+    "AGE_1": [],
+    "AGE_2": [],
+    "AGE_3": [
+        {
+            "guild": {
+                "name": "Builders Guild",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.guild.PointsPerWonderStageBuilt",
+                        "data": {
+                            "points": "1",
+                            "scope": [
+                                "LEFT",
+                                "RIGHT",
+                                "OWN"
+                            ],
+                            "activationPoint": "AT_END_OF_GAME"
+                        }
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    }
+                ]
+            }
+        },
+        {
+            "guild": {
+                "name": "Philosophers Guild",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.guild.PointsPerCardType",
+                        "data": {
+                            "points": "1",
+                            "type": "cards.scientificstructures.ScientificStructure",
+                            "scope": [
+                                "LEFT",
+                                "RIGHT"
+                            ],
+                            "activationPoint": "AT_END_OF_GAME"
+                        }
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Papyrus"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    }
+                ]
+            }
+        },
+        {
+            "guild": {
+                "name": "Traders Guild",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.guild.PointsPerCardType",
+                        "data": {
+                            "points": "1",
+                            "type": "cards.CommercialStructure",
+                            "scope": [
+                                "LEFT",
+                                "RIGHT"
+                            ],
+                            "activationPoint": "AT_END_OF_GAME"
+                        }
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Papyrus"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    }
+                ]
+            }
+        },
+        {
+            "guild": {
+                "name": "Shipowners Guild",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.guild.PointsPerCardType",
+                        "data": {
+                            "points": "1",
+                            "type": "cards.Guild",
+                            "scope": [
+                                "OWN"
+                            ],
+                            "activationPoint": "AT_END_OF_GAME"
+                        }
+                    },
+                    {
+                        "class": "effects.guild.PointsPerCardType",
+                        "data": {
+                            "points": "1",
+                            "type": "cards.rawmaterials.RawMaterial",
+                            "scope": [
+                                "OWN"
+                            ],
+                            "activationPoint": "AT_END_OF_GAME"
+                        }
+                    },
+                    {
+                        "class": "effects.guild.PointsPerCardType",
+                        "data": {
+                            "points": "1",
+                            "type": "cards.manufacturedgoods.ManufacturedGood",
+                            "scope": [
+                                "OWN"
+                            ],
+                            "activationPoint": "AT_END_OF_GAME"
+                        }
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Papyrus"
+                    },
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    }
+                ]
+            }
+        },
+        {
+            "guild": {
+                "name": "Workers Guild",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.guild.PointsPerCardType",
+                        "data": {
+                            "points": "1",
+                            "type": "cards.rawmaterials.RawMaterial",
+                            "scope": [
+                                "LEFT",
+                                "RIGHT"
+                            ],
+                            "activationPoint": "AT_END_OF_GAME"
+                        }
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    }
+                ]
+            }
+        },
+        {
+            "guild": {
+                "name": "Spies Guild",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.guild.PointsPerCardType",
+                        "data": {
+                            "points": "1",
+                            "type": "cards.MilitaryStructure",
+                            "scope": [
+                                "LEFT",
+                                "RIGHT"
+                            ],
+                            "activationPoint": "AT_END_OF_GAME"
+                        }
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Glass"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Clay"
+                    }
+                ]
+            }
+        },
+        {
+            "guild": {
+                "name": "Strategists Guild",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.guild.PointsPerMilitaryLoss",
+                        "data": {
+                            "points": "1",
+                            "scope": [
+                                "LEFT",
+                                "RIGHT"
+                            ],
+                            "activationPoint": "AT_END_OF_GAME"
+                        }
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    }
+                ]
+            }
+        },
+        {
+            "guild": {
+                "name": "Scientists Guild",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.WildScientificStructure",
+                        "data": {
+                            "activationPoint": "AT_END_OF_GAME"
+                        }
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Papyrus"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    }
+                ]
+            }
+        },
+        {
+            "guild": {
+                "name": "Magistrates Guild",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.guild.PointsPerCardType",
+                        "data": {
+                            "points": "1",
+                            "type": "cards.CivilianStructure",
+                            "scope": [
+                                "LEFT",
+                                "RIGHT"
+                            ],
+                            "activationPoint": "AT_END_OF_GAME"
+                        }
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.manufacturedgoods.Textile"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Wood"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    }
+                ]
+            }
+        },
+        {
+            "guild": {
+                "name": "Magistrates Guild",
+                "players": "3",
+                "effect": [
+                    {
+                        "class": "effects.guild.PointsPerCardType",
+                        "data": {
+                            "points": "2",
+                            "type": "cards.manufacturedgoods.ManufacturedGood",
+                            "scope": [
+                                "LEFT",
+                                "RIGHT"
+                            ],
+                            "activationPoint": "AT_END_OF_GAME"
+                        }
+                    }
+                ],
+                "cost": [
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Stone"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    },
+                    {
+                        "class": "cards.rawmaterials.Ore"
+                    }
+                ]
+            }
+        }
+    ]
+}

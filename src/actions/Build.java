@@ -18,9 +18,9 @@ public class Build extends Action
 	private List<CostedOwnedExchangableItem> costedOwnedExchangeableItems;
 	private Card card;
 	
-	public Build(int id, Player owner,Card card, List<CostedOwnedExchangableItem> costedOwnedExchangeableItems)
+	public Build(Player owner,Card card, List<CostedOwnedExchangableItem> costedOwnedExchangeableItems)
 	{
-		super(id, owner);
+		super(owner);
 		this.costedOwnedExchangeableItems=costedOwnedExchangeableItems;
 		this.setCard(card);
 	}

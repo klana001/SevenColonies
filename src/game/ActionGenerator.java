@@ -1,8 +1,10 @@
 package game;
 
 import interfaces.ExchangableItem;
+import interfaces.UpgradableFrom;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -17,10 +19,21 @@ import effects.Effect;
 import effects.Effect.ActivationPoint;
 import actions.Build;
 import actions.DiscardForThreeCoins;
+import actions.Upgrade;
 import player.Player;
 
 public class ActionGenerator
 {
+	static private class ActionMap extends HashMap<Integer, Action>
+	{
+		private int id=0;
+		public void put(Action action)
+		{
+			put(id,action);
+			action.setId(id++);
+		}
+	}
+	
 	static public class Costings 
 	{
 		List<CostedOwnedExchangableItem> costings = new ArrayList<CostedOwnedExchangableItem>();
@@ -60,11 +73,6 @@ public class ActionGenerator
 			
 			for (CostedOwnedExchangableItem costedOwnedExchangableItem : costings)
 			{
-//				for (CostedOwnedExchangableItem otherCostedOwnedExchangableItem : otherCostings.getCostings())
-//				{
-//					if (costedOwnedExchangableItem.equivilent(otherCostedOwnedExchangableItem)) return false;
-//				}
-				
 				if (!(otherCostings.getCostings().contains(costedOwnedExchangableItem))) return false;
 			}
 			return true;
@@ -79,12 +87,36 @@ public class ActionGenerator
 	 */
 	public static HashMap<Integer,Action> generateActions(final Player player, GameState gameState)
 	{
-		HashMap<Integer,Action> actions = new HashMap<Integer,Action>();
-		int id=0;
+		ActionMap actions = new ActionMap();
+
 		
 		// add always available discard for 3 coin action
-		actions.put(id,new DiscardForThreeCoins(id++,player));
+		actions.put(new DiscardForThreeCoins(player));
 		
+		populateBuildActions(actions,player,gameState);
+		
+		populateUpgradeActions(actions,player,gameState);
+		
+				
+		return actions;
+	}
+	
+	private static void populateUpgradeActions(ActionMap actions,final Player player, GameState gameState)
+	{
+		Collection<UpgradableFrom> upgradableFromCards = Utilities.filterElements(player.getHand(),UpgradableFrom.class);
+		
+		Collection<Card> playerPlayedCards = Utilities.filterElements(player.getGameElements(), Card.class);
+		for (UpgradableFrom upgradableToCard : upgradableFromCards)
+		{
+			for (Card upgradableFromCard : upgradableToCard.upgradableFrom())
+			{
+				playerPlayedCards.stream().filter(c->c.equals(upgradableFromCard)).forEach(prereq->actions.put(new Upgrade(player,prereq,(Card) upgradableToCard)));
+			}
+		}
+	}
+	
+	private static void populateBuildActions(ActionMap actions,final Player player, GameState gameState)
+	{
 		// iterate over all cards in hand and see what can be constructed and how (combinations of requirements for each card).
 		final List<CostedOwnedExchangableItem> availableExchangableItems = new ArrayList<CostedOwnedExchangableItem>();
 		
@@ -105,7 +137,7 @@ public class ActionGenerator
 	
 			if (cardRequirements.isEmpty())
 			{
-				actions.put(id, new Build(id++,player,card,new ArrayList<CostedOwnedExchangableItem>()));
+				actions.put(new Build(player,card,new ArrayList<CostedOwnedExchangableItem>()));
 			}
 			else
 			{
@@ -118,12 +150,10 @@ public class ActionGenerator
 				// create and add build card actions for each unique costing...
 				for (Costings costing : uniqueCostings)
 				{
-					actions.put(id, new Build(id++,player,card,costing.getCostings()));
+					actions.put(new Build(player,card,costing.getCostings()));
 				}
 			}
 		}
-		
-		return actions;
 	}
 	
 	/**
@@ -148,8 +178,6 @@ public class ActionGenerator
 		}
 		else
 		{
-
-//			List<CostedOwnedExchangableItem> exchangeableItemsThatMeetRequirment = availableExchangableItems.stream().filter(c->requirement.equivilent(c.getItem())).collect(Collectors.toList());
 			List<CostedOwnedExchangableItem> exchangeableItemsThatMeetRequirment = availableExchangableItems.stream().filter(c->c.getItem().equivilent(requirement, player)).collect(Collectors.toList());
 			
 			List<ExchangableItem> newRemainingCardRequirements = Utilities.cloneObject(remainingCardRequirements);

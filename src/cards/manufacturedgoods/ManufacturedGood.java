@@ -101,8 +101,22 @@ public class ManufacturedGood extends NamedCard implements ExchangableItem,IManu
 				returnTypes.addAll(manufacturedGood.getManufacturedGoodType());
 			}
 			
+			ArrayList<JSONObject> upgradableFromJson = (ArrayList<JSONObject>) manufacturedGoodJson.get("upgradeableFrom");
+			final ArrayList<Card> upgradableFromInstanceList = new ArrayList<Card>();
+			
+			if (upgradableFromJson!=null)
+			{
+				for (JSONObject upgradableFromElementJson : upgradableFromJson)
+				{
+					final String building = (String) upgradableFromElementJson.get("building");
+					
+					upgradableFromInstanceList.add(Utilities.cloneObject(knownNamedCards.get(building)));
+				}
+			}
+			
 			ManufacturedGood newManufacturedGood = new ManufacturedGood(age,new ArrayList<Type>(returnTypes),costInstanceList,manufacturedGoodName);
 			manufacturedGoodsList.add(newManufacturedGood);
+			knownNamedCards.put(newManufacturedGood.getName(),newManufacturedGood);
 		}
 		
 		

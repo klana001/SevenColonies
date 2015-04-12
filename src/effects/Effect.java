@@ -14,6 +14,13 @@ public interface Effect
 		EVERY_TRADE, TAKE_FROM_BANK
 	}
 	
+	public enum Scope
+	{
+		LEFT,
+		RIGHT,
+		OWN
+	}
+	
 	public void performEffect(GameState gameState, Object... data);
 	
 	public ActivationPoint getActivationPoint();

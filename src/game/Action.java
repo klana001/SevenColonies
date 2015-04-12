@@ -15,11 +15,11 @@ abstract public class Action
 		return id;
 	}
 
-	public Action(int id,Player owner)
+	public Action(Player owner)
 	{
 		super();
 		priority = 0;
-		this.id = id;
+
 		this.owner=owner;
 	}
 	
@@ -49,6 +49,11 @@ abstract public class Action
 	 * @return
 	 */
 	abstract public List<Payment> getPayments();
+
+	public void setId(int id)
+	{
+		this.id = id;
+	}
 	
 	
 	

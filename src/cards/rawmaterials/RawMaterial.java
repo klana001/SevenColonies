@@ -93,6 +93,19 @@ public class RawMaterial extends NamedCard implements ExchangableItem,IRawMateri
 				}
 			}
 			
+			ArrayList<JSONObject> upgradableFromJson = (ArrayList<JSONObject>) rawMaterialJson.get("upgradeableFrom");
+			final ArrayList<Card> upgradableFromInstanceList = new ArrayList<Card>();
+			
+			if (upgradableFromJson!=null)
+			{
+				for (JSONObject upgradableFromElementJson : upgradableFromJson)
+				{
+					final String building = (String) upgradableFromElementJson.get("building");
+					
+					upgradableFromInstanceList.add(Utilities.cloneObject(knownNamedCards.get(building)));
+				}
+			}
+			
 			Collection<Type> returnTypes = new HashSet<RawMaterial.Type>();
 			for (IRawMaterial rawMaterial : typeList)
 			{
@@ -101,6 +114,7 @@ public class RawMaterial extends NamedCard implements ExchangableItem,IRawMateri
 			
 			RawMaterial newRawMaterial = new RawMaterial(age,new ArrayList<Type>(returnTypes),costInstanceList,rawMaterialName);
 			rawMaterialsList.add(newRawMaterial);
+			knownNamedCards.put(newRawMaterial.getName(),newRawMaterial);
 		}
 		
 		

@@ -14,9 +14,9 @@ public class DiscardForThreeCoins extends Action
 {
 	private Card cardToDiscard;
 	
-	public DiscardForThreeCoins(int id,Player player)
+	public DiscardForThreeCoins(Player player)
 	{
-		super(id,player);
+		super(player);
 	}
 
 

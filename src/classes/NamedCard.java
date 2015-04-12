@@ -1,11 +1,15 @@
 package classes;
 
-import game.Age;
+import java.util.HashMap;
+import java.util.Map;
 
-import cards.rawmaterials.RawMaterial;
+import game.Age;
 
 abstract public class NamedCard extends Card
 {
+	
+	protected static Map<String,NamedCard> knownNamedCards = new HashMap<String,NamedCard>();
+	
 	public NamedCard(Age age)
 	{
 		super(age);

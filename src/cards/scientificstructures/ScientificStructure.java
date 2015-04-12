@@ -86,6 +86,19 @@ public class ScientificStructure extends NamedCard implements IScientificStructu
 				}
 			}
 			
+			ArrayList<JSONObject> upgradableFromJson = (ArrayList<JSONObject>) scientificStructureJson.get("upgradeableFrom");
+			final ArrayList<Card> upgradableFromInstanceList = new ArrayList<Card>();
+			
+			if (upgradableFromJson!=null)
+			{
+				for (JSONObject upgradableFromElementJson : upgradableFromJson)
+				{
+					final String building = (String) upgradableFromElementJson.get("building");
+					
+					upgradableFromInstanceList.add(Utilities.cloneObject(knownNamedCards.get(building)));
+				}
+			}
+			
 			Collection<Type> returnTypes = new HashSet<ScientificStructure.Type>();
 			for (IScientificStructure scientificStructure : typeList)
 			{
@@ -94,7 +107,7 @@ public class ScientificStructure extends NamedCard implements IScientificStructu
 
 			
 			ScientificStructure newScientificStructure = new ScientificStructure(age,new ArrayList<Type>(returnTypes),scientificStructureName,costInstanceList);
-
+			knownNamedCards.put(newScientificStructure.getName(),newScientificStructure);
 			scientificStructuresList.add(newScientificStructure);
 		}
 		

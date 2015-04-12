@@ -8,7 +8,9 @@ import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -82,23 +84,26 @@ public class CivilianStructure extends NamedCard implements UpgradableFrom
 				}
 			}
 			
-			ArrayList<JSONObject> upgradableFromJson = (ArrayList<JSONObject>) civilianStructureJson.get("upgradableFrom");
+			ArrayList<JSONObject> upgradableFromJson = (ArrayList<JSONObject>) civilianStructureJson.get("upgradeableFrom");
 			final ArrayList<Card> upgradableFromInstanceList = new ArrayList<Card>();
 			
 			if (upgradableFromJson!=null)
 			{
 				for (JSONObject upgradableFromElementJson : upgradableFromJson)
 				{
-					upgradableFromInstanceList.add((Card) Utilities.createClass(upgradableFromElementJson));
+					final String building = (String) upgradableFromElementJson.get("building");
+					
+					upgradableFromInstanceList.add(Utilities.cloneObject(knownNamedCards.get(building)));
 				}
 			}
 			
 			CivilianStructure newCivilianStructure = new CivilianStructure(age,points,costInstanceList,civilianStructureName,upgradableFromInstanceList);
+			knownNamedCards.put(newCivilianStructure.getName(),newCivilianStructure);
 			civilianStructuresList.add(newCivilianStructure);
 		}
 		
 		
-
+		
 		return civilianStructuresList;
 	}
 

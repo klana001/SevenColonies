@@ -150,5 +150,10 @@ abstract public class Player
 	{
 		return getName();
 	}
+
+	public Wonder getWonder()
+	{
+		return wonder;
+	}
 	
 }

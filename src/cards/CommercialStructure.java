@@ -86,8 +86,22 @@ public class CommercialStructure extends NamedCard
 				}
 			}
 			
+			ArrayList<JSONObject> upgradableFromJson = (ArrayList<JSONObject>) commercialStructureJson.get("upgradeableFrom");
+			final ArrayList<Card> upgradableFromInstanceList = new ArrayList<Card>();
+			
+			if (upgradableFromJson!=null)
+			{
+				for (JSONObject upgradableFromElementJson : upgradableFromJson)
+				{
+					final String building = (String) upgradableFromElementJson.get("building");
+					
+					upgradableFromInstanceList.add(Utilities.cloneObject(knownNamedCards.get(building)));
+				}
+			}
+			
 			CommercialStructure newCommercialStructure = new CommercialStructure(age,costInstanceList,commercialStructureName,effectList);
 			commercialStructuresList.add(newCommercialStructure);
+			knownNamedCards.put(newCommercialStructure.getName(),newCommercialStructure);
 		}
 		
 		

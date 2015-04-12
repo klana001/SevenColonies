@@ -81,8 +81,22 @@ public class MilitaryStructure extends NamedCard implements Military
 				}
 			}
 			
+			ArrayList<JSONObject> upgradableFromJson = (ArrayList<JSONObject>) militaryStructureJson.get("upgradeableFrom");
+			final ArrayList<Card> upgradableFromInstanceList = new ArrayList<Card>();
+			
+			if (upgradableFromJson!=null)
+			{
+				for (JSONObject upgradableFromElementJson : upgradableFromJson)
+				{
+					final String building = (String) upgradableFromElementJson.get("building");
+					
+					upgradableFromInstanceList.add(Utilities.cloneObject(knownNamedCards.get(building)));
+				}
+			}
+			
 			MilitaryStructure newMilitaryStructure = new MilitaryStructure(age,strength,costInstanceList,militaryStructureName);
 			militaryStructuresList.add(newMilitaryStructure);
+			knownNamedCards.put(newMilitaryStructure.getName(),newMilitaryStructure);
 		}
 		
 		

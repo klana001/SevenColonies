@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import common.Utilities;
 import cards.CivilianStructure;
 import cards.CommercialStructure;
+import cards.Guild;
 import cards.MilitaryStructure;
 import cards.manufacturedgoods.ManufacturedGood;
 import cards.rawmaterials.RawMaterial;
@@ -104,6 +105,19 @@ public class Game
 			ScientificStructure.constructScientificStructures(gameState.getAge()).forEach(w -> currentAgeCards.add(w));
 			MilitaryStructure.constructMilitaryStructures(gameState.getAge()).forEach(w -> currentAgeCards.add(w));
 			CommercialStructure.constructCommercialStructures(gameState.getAge()).forEach(w -> currentAgeCards.add(w));
+			
+			
+			// add no. player + 2 random guilds to current age deck.
+			if (gameState.getAge() == Age.AGE_3)
+			{
+				List<Card> guilds = new ArrayList<Card>();
+				Guild.constructGuilds(gameState.getAge()).forEach(w -> guilds.add(w));
+				Collections.shuffle(guilds, rand);
+				for (int i=0;i<gameState.getPlayers().size()+2;i++)
+				{
+					currentAgeCards.add(guilds.remove(0));
+				}
+			}
 
 			
 			Collections.shuffle(currentAgeCards, rand);
