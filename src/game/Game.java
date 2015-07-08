@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import common.Military;
+import common.Scoreable;
 import common.Utilities;
 import cards.CivilianStructure;
 import cards.CommercialStructure;
@@ -16,7 +18,10 @@ import cards.Guild;
 import cards.MilitaryStructure;
 import cards.manufacturedgoods.ManufacturedGood;
 import cards.rawmaterials.RawMaterial;
+import cards.scientificstructures.Cog;
 import cards.scientificstructures.ScientificStructure;
+import cards.scientificstructures.Sextant;
+import cards.scientificstructures.Tablet;
 import classes.Card;
 import classes.Hand;
 import classes.Round;
@@ -25,10 +30,13 @@ import effects.Effect.ActivationPoint;
 import player.NullPlayer;
 import player.Player;
 import wonders.Wonder;
+import wonders.wonderstage.WonderStage;
 
 public class Game
 {
-	static public Random rand = new Random(1);
+	private static final int POINTS_PER_SCIENTIFIC_SYMBOL_SET = 7;
+	private static final int COINS_PER_POINT = 3;
+	static public Random rand = new Random(22);
 	public Game() throws Exception
 	{
 		
@@ -43,7 +51,7 @@ public class Game
 			players.add(new NullPlayer("Player A"));
 			players.add(new NullPlayer("Player B"));
 			players.add(new NullPlayer("Player C"));
-			Collections.shuffle(players);
+			Collections.shuffle(players,rand);
 			
 			
 			gameState.setPlayers(players);
@@ -124,7 +132,7 @@ public class Game
 			ArrayList<Card> remainingCards = new ArrayList<Card>(currentAgeCards);
 			
 	
-			currentAgeCards.stream().forEach(c-> System.out.println(c.getName()));
+//			currentAgeCards.stream().forEach(c-> System.out.println(c.getName()));
 			
 			int cardsPerPlayer = currentAgeCards.size()/gameState.getPlayers().size();
 			
@@ -138,6 +146,9 @@ public class Game
 				}
 				
 				player.setHand(hand);
+				
+				// reset player
+				player.getGetGameElementsNewThisAge().clear();
 			}
 			
 			
@@ -148,13 +159,13 @@ public class Game
 			while (gameState.getRound()!=Round.LAST)
 			{
 				round++;
-				System.out.println("AGE: "+gameState.getAge()+" round: "+round);
+//				System.out.println("AGE: "+gameState.getAge()+" round: "+round);
 				// all players make their choice of action
 				List<Player> actionablePlayers = gameState.getPlayers().stream().filter(p->p.getHand().size()>0).collect(Collectors.toList());
 				
 				for (Player player : actionablePlayers)
 				{
-					System.out.println("Player: "+player+" with "+player.getCoins()+" coins:");
+//					System.out.println("Player: "+player+" with "+player.getCoins()+" coins:");
 					// calculate possible actions;
 					HashMap<Integer,Action> actionCandidates = ActionGenerator.generateActions(player, gameState);
 					
@@ -257,14 +268,111 @@ public class Game
 			
 			// perform military
 			gameState.setStage(GameState.Stage.MILITARY);
+			for (Player player : gameState.getPlayers())
+			{
+				int playerStrength = Utilities.filterElements(player.getGameElements(), Military.class).stream().mapToInt(Military::getStrength).sum();
+				int leftPlayerStrength = Utilities.filterElements(gameState.getPlayer(player.getLeftNeighbourId()).getGameElements(), Military.class).stream().mapToInt(Military::getStrength).sum();
+				int rightPlayerStrength = Utilities.filterElements(gameState.getPlayer(player.getRightNeighbourId()).getGameElements(), Military.class).stream().mapToInt(Military::getStrength).sum();
+				
+				MilitaryToken victoryToken;
+				MilitaryToken defeatToken = new DefeatToken();
+				switch (gameState.getAge())
+				{
+					case AGE_1:
+						victoryToken = new OnePointMilitaryVictoryToken();
+						break;
+					case AGE_2:
+						victoryToken = new ThreePointMilitaryVictoryToken();
+						break;
+					case AGE_3:
+						victoryToken = new FivePointMilitaryVictoryToken();
+						break;
+					default:
+						throw new RuntimeException("un expected age: "+gameState.getAge());
+				}
+				
+				if (playerStrength>leftPlayerStrength)
+				{
+					player.addMilitaryToken(victoryToken);
+				}
+				else if (playerStrength==leftPlayerStrength)
+				{
+					// stalemate.
+				}
+				else
+				{
+					player.addMilitaryToken(defeatToken);
+				}
+				
+				if (playerStrength>rightPlayerStrength)
+				{
+					player.addMilitaryToken(victoryToken);
+				}
+				else if (playerStrength==rightPlayerStrength)
+				{
+					// stalemate.
+				}
+				else
+				{
+					player.addMilitaryToken(defeatToken);
+				}
+
+			}
+			
 			
 			// increment age
 
 			gameState.setAge(Age.values()[Arrays.asList(Age.values()).indexOf(gameState.getAge())+1]);
 		}
+		final GameState finalGameState=gameState;
 		
-		// calculate scores
+		// perform non-scoreable end of game effects 
+		for (Player player : gameState.getPlayers())
+		{
+			Utilities.filterElements(player.getGameElements(), Effect.class).stream().filter(e-> e.getActivationPoint()==ActivationPoint.AT_END_OF_GAME).forEach(e->e.performEffect(finalGameState, player));
+		}
+		
+		
+		for (Player player : gameState.getPlayers())
+		{
+			// calculate guild score
+			Utilities.filterElements(player.getGameElements(), Guild.class).stream().forEach(
+					g->g.getEffects().stream().filter(e-> e.getActivationPoint()==ActivationPoint.AT_END_OF_GAME).forEach(e->e.performEffect(finalGameState, player))
+					);
+			// calculate wonder stage score
+			Utilities.filterElements(Utilities.filterElements(player.getGameElements().stream(), WonderStage.class),Scoreable.class).forEach(s->player.modifyScore(s.calculateScore()));
+		
+			// calculate military score
+			player.getMilitaryTokens().forEach(m->player.modifyScore(m.getScoreModificationAmount()));
+		
+			// calculate civilian score
+			Utilities.filterElements(player.getGameElements(), CivilianStructure.class).forEach(c->player.modifyScore(c.getPoints()));
+		
+			// calculate scientific score
+			int cogCount = (int) Utilities.filterElements(player.getGameElements(), Cog.class).stream().count();
+			int sextantCount = (int) Utilities.filterElements(player.getGameElements(), Sextant.class).stream().count();
+			int tabletCount = (int) Utilities.filterElements(player.getGameElements(), Tablet.class).stream().count();
+			
+			int setCount=Math.min(Math.min(cogCount, sextantCount),tabletCount);
+			
+			int resultantScore= (int) ( Math.pow(cogCount, 2) + Math.pow(sextantCount, 2) + Math.pow(tabletCount, 2) + POINTS_PER_SCIENTIFIC_SYMBOL_SET * setCount);
+			player.modifyScore(resultantScore);
+		
+			// calculate treasury score
+			player.modifyScore(player.getCoins()/COINS_PER_POINT);
+		}
 		
 		// determine winner
+		Collections.sort(gameState.getPlayers(),new Comparator<Player>()
+		{
+
+			// sort in reverse order
+			@Override
+			public int compare(Player arg0, Player arg1)
+			{
+				return arg1.getScore()-arg0.getScore();
+			}
+		});
+		gameState.getPlayers().forEach(p-> System.out.println(p.getName()+" score: "+p.getScore()));
 	}
 }

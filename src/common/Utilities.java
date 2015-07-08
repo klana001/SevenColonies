@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.json.simple.JSONObject;
 
@@ -34,6 +35,12 @@ public class Utilities
 		return (Collection<T>) collection.stream().filter(element -> filterType.isInstance(element))
 				.map(element -> filterType.cast(element))
 				.collect(Collectors.toList());
+	}
+	
+	public static<T,U> Stream<T> filterElements(Stream<U> stream, Class<T> filterType)
+	{
+		return stream.filter(element -> filterType.isInstance(element))
+				.map(element -> filterType.cast(element));
 	}
 	
 	/**

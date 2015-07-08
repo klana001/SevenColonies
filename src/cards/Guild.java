@@ -138,4 +138,9 @@ public class Guild extends NamedCard implements IGuild
 	{
 		return getName();
 	}
+
+	public List<Effect> getEffects()
+	{
+		return effects;
+	}
 }

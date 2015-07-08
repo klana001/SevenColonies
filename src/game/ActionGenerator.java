@@ -122,8 +122,8 @@ public class ActionGenerator
 		
 		availableExchangableItems.add(new CostedOwnedExchangableItem(new Coin(player.getCoins()), 0,player));
 		Utilities.filterElements(player.getGameElements(),ExchangableItem.class).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, 0,player)));
-		Utilities.filterElements(gameState.getPlayer(player.getLeftNeighbourId()).getGameElements(),ExchangableItem.class).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, 2,gameState.getPlayer(player.getLeftNeighbourId()))));
-		Utilities.filterElements(gameState.getPlayer(player.getRightNeighbourId()).getGameElements(),ExchangableItem.class).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, 2,gameState.getPlayer(player.getRightNeighbourId()))));
+		Utilities.filterElements(gameState.getPlayer(player.getLeftNeighbourId()).getGameElements().stream(),ExchangableItem.class).filter(e->!Coin.class.isInstance(e)).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, 2,gameState.getPlayer(player.getLeftNeighbourId()))));
+		Utilities.filterElements(gameState.getPlayer(player.getRightNeighbourId()).getGameElements().stream(),ExchangableItem.class).filter(e->!Coin.class.isInstance(e)).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, 2,gameState.getPlayer(player.getRightNeighbourId()))));
 		
 		final List<Effect> tradeEffectsMaster = Utilities.filterElements(player.getGameElements(),Effect.class).stream().filter(e->e.getActivationPoint()==ActivationPoint.EVERY_TRADE).collect(Collectors.toList());
 		

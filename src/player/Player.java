@@ -2,6 +2,7 @@ package player;
 
 import game.Action;
 import game.GameState;
+import game.MilitaryToken;
 import interfaces.GameElement;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ abstract public class Player
 	private Action action;
 	private int coins;
 	private int id;
+	private int score=0;
+	private List<MilitaryToken> militaryTokens = new ArrayList<MilitaryToken>(); 
 
 	abstract public Wonder chooseWonder(Collection<Wonder> wonders);
 	
@@ -72,11 +75,6 @@ abstract public class Player
 	public List<GameElement> getGameElements()
 	{
 		return gameElements;
-	}
-
-	public void setGameElements(ArrayList<GameElement> getGameElements)
-	{
-		this.gameElements = getGameElements;
 	}
 
 	public List<GameElement> getGetGameElementsNewThisAge()
@@ -154,6 +152,27 @@ abstract public class Player
 	public Wonder getWonder()
 	{
 		return wonder;
+	}
+
+	public int getScore()
+	{
+		return score;
+	}
+
+	public void modifyScore(int i)
+	{
+		score+=i;
+	}
+	
+	public void addMilitaryToken(MilitaryToken token)
+	{
+		militaryTokens.add(token);
+		addGameElement(token);
+	}
+
+	public List<MilitaryToken> getMilitaryTokens()
+	{
+		return new ArrayList<MilitaryToken>(militaryTokens);
 	}
 	
 }

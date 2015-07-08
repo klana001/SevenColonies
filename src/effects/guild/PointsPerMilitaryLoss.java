@@ -11,6 +11,8 @@ import common.MutableInteger;
 import common.Utilities;
 import player.Player;
 import effects.Effect;
+import effects.Effect.Scope;
+import game.DefeatToken;
 import game.GameState;
 
 public class PointsPerMilitaryLoss implements Effect,JSONReadable
@@ -39,10 +41,37 @@ public class PointsPerMilitaryLoss implements Effect,JSONReadable
 	@Override
 	public void performEffect(GameState gameState, Object... data)
 	{
-		throw new RuntimeException("TBD");
+		if (data[0] instanceof Player)
+		{
+			Player player = (Player) data[0];
+			int points = 0;
+			if (scope.contains(Scope.LEFT))
+			{
+				points += calculatePoints(gameState.getPlayer(player.getLeftNeighbourId()));
+			}
+			
+			if (scope.contains(Scope.RIGHT))
+			{
+				points += calculatePoints(gameState.getPlayer(player.getRightNeighbourId()));
+			}
+			
+			if (scope.contains(Scope.OWN))
+			{
+				points += calculatePoints(player);
+			}
+			
+			player.modifyScore(points);
+		}
+		else
+		{
+			throw new RuntimeException("data[0] is not a Player");
+		}
 	}
 
-
+	private int calculatePoints(Player player)
+	{
+		return (int) Utilities.filterElements(player.getMilitaryTokens().stream(), DefeatToken.class).count()*points;
+	}
 
 	@Override
 	public ActivationPoint getActivationPoint()

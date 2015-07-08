@@ -26,9 +26,9 @@ public class NullPlayer extends Player
 	@Override
 	public Action chooseAction(List<Action> actionCandidates)
 	{
-		System.out.println("Actions for player: "+this);
+//		System.out.println("Actions for player: "+this);
 		
-		actionCandidates.stream().forEach(a->System.out.println(a));
+//		actionCandidates.stream().forEach(a->System.out.println(a));
 		
 		Action action = actionCandidates.get(Game.rand.nextInt(actionCandidates.size()));
 		
@@ -39,7 +39,7 @@ public class NullPlayer extends Player
 		
 		
 		
-		System.out.println("Action chosen: "+action);
+//		System.out.println("Action chosen: "+action);
 		
 		return action;
 	}

@@ -63,14 +63,7 @@ public class PointsPerCardType implements Effect,JSONReadable
 				points += calculatePoints(player);
 			}
 			
-			if (data[1] instanceof MutableInteger)
-			{
-				((MutableInteger) data[1]).val+=points;
-			}
-			else
-			{
-				throw new RuntimeException("data[1] is not a MutableInteger");
-			}
+			player.modifyScore(points);
 		}
 		else
 		{
