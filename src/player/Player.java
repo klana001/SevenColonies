@@ -88,7 +88,7 @@ abstract public class Player
 		return hand.size()>1;
 	}
 
-	abstract public Action chooseAction(List<Action> actionCandidates);
+	abstract public Action chooseAction(List<Action> actionCandidates, GameState gameState);
 
 	public Action getAction()
 	{

@@ -19,11 +19,12 @@ import classes.Card;
 import classes.NamedCard;
 import common.Utilities;
 import effects.Effect;
+import effects.Effecting;
 import game.Age;
 import interfaces.ExchangableItem;
 
 
-public class CommercialStructure extends NamedCard
+public class CommercialStructure extends NamedCard implements Effecting
 {
 	private List<ExchangableItem> cost;
 	private String name;

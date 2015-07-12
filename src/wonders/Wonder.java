@@ -251,4 +251,10 @@ public class Wonder implements Scoreable,Military,GameElement,Effect
 	{
 		return name;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return name;
+	}
 }

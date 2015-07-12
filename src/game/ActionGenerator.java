@@ -1,6 +1,7 @@
 package game;
 
 import interfaces.ExchangableItem;
+import interfaces.GameElement;
 import interfaces.UpgradableFrom;
 
 import java.util.ArrayList;
@@ -12,11 +13,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import common.Utilities;
+import cards.IManufacturedGood;
+import cards.IRawMaterial;
+import cards.manufacturedgoods.ManufacturedGood;
+import cards.rawmaterials.RawMaterial;
 import classes.Card;
 import classes.Coin;
 import classes.CostedOwnedExchangableItem;
 import effects.Effect;
 import effects.Effect.ActivationPoint;
+import effects.Effecting;
+import effects.commercial.LeftTradeRawMaterialsForOneCoin;
+import effects.commercial.RightTradeRawMaterialsForOneCoin;
+import effects.commercial.TradeManufacturedGoodsForOneCoin;
 import actions.Build;
 import actions.DiscardForThreeCoins;
 import actions.Upgrade;
@@ -24,6 +33,43 @@ import player.Player;
 
 public class ActionGenerator
 {
+	static private class TradeCostGenerator
+	{
+		int leftRawMaterialsTradeCost;
+		int rightRawMaterialsTradeCost;
+		int manufacturedGoodsTradeCost;
+		private int leftPlayerId;
+		private int RightPlayerId;
+		
+		public TradeCostGenerator(Player player,List<Effect> tradeEffects)
+		{
+			leftRawMaterialsTradeCost = Utilities.filterElements(tradeEffects,LeftTradeRawMaterialsForOneCoin.class).isEmpty()?2:1;
+			rightRawMaterialsTradeCost = Utilities.filterElements(tradeEffects,RightTradeRawMaterialsForOneCoin.class).isEmpty()?2:1;
+			manufacturedGoodsTradeCost = Utilities.filterElements(tradeEffects,TradeManufacturedGoodsForOneCoin.class).isEmpty()?2:1;
+			this.leftPlayerId=player.getLeftNeighbourId();
+			this.RightPlayerId=player.getRightNeighbourId();
+		}
+		
+		public int getTradeCost(ExchangableItem exchangableItem,int playerId)
+		{
+			int cost = 2;
+			if (playerId == leftPlayerId && exchangableItem instanceof IRawMaterial)
+			{
+				cost = leftRawMaterialsTradeCost;
+			}
+			else if (playerId == RightPlayerId && exchangableItem instanceof IRawMaterial)
+			{
+				cost = rightRawMaterialsTradeCost;
+			}
+			else if (exchangableItem instanceof IManufacturedGood)
+			{
+				cost = manufacturedGoodsTradeCost;
+			}
+			return cost;
+
+		}
+	}
+	
 	static private class ActionMap extends HashMap<Integer, Action>
 	{
 		private int id=0;
@@ -117,15 +163,25 @@ public class ActionGenerator
 	
 	private static void populateBuildActions(ActionMap actions,final Player player, GameState gameState)
 	{
+		final List<Effect> tradeEffectsMaster = new ArrayList<Effect>();
+		Utilities.filterElements(player.getGameElements(),Effecting.class).stream().forEach(effecting->
+				tradeEffectsMaster.addAll(
+						effecting.getEffect().stream().filter(e->
+							e.getActivationPoint()==ActivationPoint.EVERY_TRADE).collect(Collectors.toList())));
+		
+		final TradeCostGenerator tradeCostGenerator = new TradeCostGenerator(player,tradeEffectsMaster); 
+		
 		// iterate over all cards in hand and see what can be constructed and how (combinations of requirements for each card).
 		final List<CostedOwnedExchangableItem> availableExchangableItems = new ArrayList<CostedOwnedExchangableItem>();
 		
 		availableExchangableItems.add(new CostedOwnedExchangableItem(new Coin(player.getCoins()), 0,player));
 		Utilities.filterElements(player.getGameElements(),ExchangableItem.class).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, 0,player)));
-		Utilities.filterElements(gameState.getPlayer(player.getLeftNeighbourId()).getGameElements().stream(),ExchangableItem.class).filter(e->!Coin.class.isInstance(e)).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, 2,gameState.getPlayer(player.getLeftNeighbourId()))));
-		Utilities.filterElements(gameState.getPlayer(player.getRightNeighbourId()).getGameElements().stream(),ExchangableItem.class).filter(e->!Coin.class.isInstance(e)).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, 2,gameState.getPlayer(player.getRightNeighbourId()))));
 		
-		final List<Effect> tradeEffectsMaster = Utilities.filterElements(player.getGameElements(),Effect.class).stream().filter(e->e.getActivationPoint()==ActivationPoint.EVERY_TRADE).collect(Collectors.toList());
+		Utilities.filterElements(gameState.getPlayer(player.getLeftNeighbourId()).getGameElements().stream(),ExchangableItem.class).filter(e->!Coin.class.isInstance(e)).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, tradeCostGenerator.getTradeCost(e,player.getLeftNeighbourId()),gameState.getPlayer(player.getLeftNeighbourId()))));
+		Utilities.filterElements(gameState.getPlayer(player.getRightNeighbourId()).getGameElements().stream(),ExchangableItem.class).filter(e->!Coin.class.isInstance(e)).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, tradeCostGenerator.getTradeCost(e,player.getRightNeighbourId()),gameState.getPlayer(player.getRightNeighbourId()))));
+		
+
+//		Collection<Effect> output = Utilities.filterElements(player.getGameElements(),Effect.class);
 		
 
 		
@@ -205,10 +261,10 @@ public class ActionGenerator
 				Player newPlayer = Utilities.cloneObject(player);
 				newPlayer.setCoins(newPlayer.getCoins()-originalItem.getCost());
 				
-				for (Effect effect : tradeEffects)
-				{
-					effect.performEffect(gameState, item, newPlayer);
-				}
+//				for (Effect effect : tradeEffects)
+//				{
+//					effect.performEffect(gameState, item, newPlayer);
+//				}
 				
 				Costings newCostings= Utilities.cloneObject(costings);
 				newCostings.add(item);

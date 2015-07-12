@@ -27,6 +27,7 @@ import classes.Hand;
 import classes.Round;
 import effects.Effect;
 import effects.Effect.ActivationPoint;
+import player.HumanPlayer;
 import player.NullPlayer;
 import player.Player;
 import wonders.Wonder;
@@ -36,7 +37,7 @@ public class Game
 {
 	private static final int POINTS_PER_SCIENTIFIC_SYMBOL_SET = 7;
 	private static final int COINS_PER_POINT = 3;
-	static public Random rand = new Random(22);
+	static public Random rand = new Random(0);
 	public Game() throws Exception
 	{
 		
@@ -51,6 +52,7 @@ public class Game
 			players.add(new NullPlayer("Player A"));
 			players.add(new NullPlayer("Player B"));
 			players.add(new NullPlayer("Player C"));
+//			players.add(new HumanPlayer("HUMAN"));
 			Collections.shuffle(players,rand);
 			
 			
@@ -170,7 +172,7 @@ public class Game
 					HashMap<Integer,Action> actionCandidates = ActionGenerator.generateActions(player, gameState);
 					
 					
-					final Action playerChosenAction = player.chooseAction(new ArrayList<Action>(actionCandidates.values()));
+					final Action playerChosenAction = player.chooseAction(new ArrayList<Action>(actionCandidates.values()), gameState);
 
 					Action chosenAction = actionCandidates.get(playerChosenAction.getId());
 					

@@ -2,6 +2,7 @@ package player;
 
 import game.Action;
 import game.Game;
+import game.GameState;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,7 +25,7 @@ public class NullPlayer extends Player
 	}
 
 	@Override
-	public Action chooseAction(List<Action> actionCandidates)
+	public Action chooseAction(List<Action> actionCandidates, GameState gameState)
 	{
 //		System.out.println("Actions for player: "+this);
 		

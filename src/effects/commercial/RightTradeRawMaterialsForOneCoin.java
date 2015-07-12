@@ -16,7 +16,7 @@ public class RightTradeRawMaterialsForOneCoin implements Effect
 	@Override
 	public void performEffect(GameState gameState, Object... data)
 	{
-		throw new RuntimeException("TBD");
+		// no effect. The cost reduction occurs during action generation. 
 	}
 
 	@Override
