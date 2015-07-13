@@ -52,7 +52,7 @@ public class WildRawMaterial implements Effect, IRawMaterial
 
 
 	@Override
-	public ActivationPoint getActivationPoint()
+	public ActivationPoint getActivationPoint(GameState gameState, Player player)
 	{
 		return null; // effect is redundant.
 	}

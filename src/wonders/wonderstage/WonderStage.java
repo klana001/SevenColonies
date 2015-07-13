@@ -10,11 +10,18 @@ abstract public class WonderStage extends Base implements Purchasable
 {
 	private boolean built;
 	private final Collection<ExchangableItem> cost;
+	private int buildOrderIndex;
 
-	public WonderStage(Collection<ExchangableItem> cost)
+	public int getBuildOrderIndex()
+	{
+		return buildOrderIndex;
+	}
+
+	public WonderStage(Collection<ExchangableItem> cost, int buildOrderIndex)
 	{
 		super();
 		this.cost = cost;
+		this.buildOrderIndex=buildOrderIndex;
 	}
 
 	public boolean isBuilt()
@@ -38,5 +45,7 @@ abstract public class WonderStage extends Base implements Purchasable
 	{
 		return this.getClass().isInstance(arg0)?0:-1;
 	}
+	
+	
 	
 }

@@ -17,14 +17,19 @@ public class CompositeWonderStage extends WonderStage implements Scoreable,Milit
 {
 	private final List<WonderStage> wonderStages;
 
-	public CompositeWonderStage( List<WonderStage> wonderStages)
+	public CompositeWonderStage( List<WonderStage> wonderStages,int orderIndex)
 	{
-		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),wonderStages);
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),wonderStages,orderIndex);
 	}
 	
-	public CompositeWonderStage(List<ExchangableItem> cost, List<WonderStage> wonderStages)
+	public CompositeWonderStage( List<WonderStage> wonderStages)
 	{
-		super(cost);
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),wonderStages,0);
+	}
+	
+	public CompositeWonderStage(List<ExchangableItem> cost, List<WonderStage> wonderStages,int orderIndex)
+	{
+		super(cost,orderIndex);
 		this.wonderStages=wonderStages;
 	}
 	

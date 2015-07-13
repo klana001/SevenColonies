@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import player.Player;
 import common.NoCost;
 import common.Utilities;
 import effects.Effect;
@@ -14,15 +15,20 @@ import interfaces.ExchangableItem;
 
 public class BuildOneFreeBuildingEachAgeWonderStage extends WonderStage implements Effect
 {
-	public BuildOneFreeBuildingEachAgeWonderStage(List<ExchangableItem> cost)
+	public BuildOneFreeBuildingEachAgeWonderStage(List<ExchangableItem> cost,int orderIndex)
 	{
-		super(cost);
+		super(cost,orderIndex);
 	}
 	
 
+	public BuildOneFreeBuildingEachAgeWonderStage(int orderIndex)
+	{
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),orderIndex);
+	}
+	
 	public BuildOneFreeBuildingEachAgeWonderStage()
 	{
-		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),0);
 	}
 
 	@Override
@@ -38,7 +44,7 @@ public class BuildOneFreeBuildingEachAgeWonderStage extends WonderStage implemen
 	}
 
 	@Override
-	public ActivationPoint getActivationPoint()
+	public ActivationPoint getActivationPoint(GameState gameState, Player player)
 	{
 		return ActivationPoint.ONCE_PER_AGE;
 	}

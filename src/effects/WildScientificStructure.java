@@ -94,7 +94,7 @@ public class WildScientificStructure implements Effect, IScientificStructure, JS
 	}
 
 	@Override
-	public ActivationPoint getActivationPoint()
+	public ActivationPoint getActivationPoint(GameState gameState, Player player)
 	{
 		return activationPoint;
 	}

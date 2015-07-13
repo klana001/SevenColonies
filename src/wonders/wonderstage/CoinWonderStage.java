@@ -14,14 +14,19 @@ public class CoinWonderStage extends WonderStage implements Money
 {
 	private final Coin coin;
 
-	public CoinWonderStage( Coin coin)
+	public CoinWonderStage( Coin coin,int orderIndex)
 	{
-		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),coin);
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),coin,orderIndex);
 	}
 	
-	public CoinWonderStage(List<ExchangableItem> cost, Coin coin)
+	public CoinWonderStage( Coin coin)
 	{
-		super(cost);
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),coin,0);
+	}
+	
+	public CoinWonderStage(List<ExchangableItem> cost, Coin coin,int orderIndex)
+	{
+		super(cost,orderIndex);
 		this.coin=coin;
 	}
 	

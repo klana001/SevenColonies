@@ -1,5 +1,6 @@
 package effects;
 
+import player.Player;
 import game.GameState;
 
 public interface Effect
@@ -23,5 +24,5 @@ public interface Effect
 	
 	public void performEffect(GameState gameState, Object... data);
 	
-	public ActivationPoint getActivationPoint();
+	public ActivationPoint getActivationPoint(GameState gameState, Player player);
 }

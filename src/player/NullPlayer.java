@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import actions.BuildWonderStage;
 import actions.DiscardForThreeCoins;
 import wonders.Wonder;
 
@@ -33,16 +34,31 @@ public class NullPlayer extends Player
 		
 		Action action = actionCandidates.get(Game.rand.nextInt(actionCandidates.size()));
 		
-		if (action instanceof DiscardForThreeCoins)
+		if (action instanceof DiscardForThreeCoins || action instanceof BuildWonderStage)
 		{
-			((DiscardForThreeCoins) action).setCardToDiscard(getHand().get(Game.rand.nextInt(getHand().size())));
+			try
+			{
+				action.setData(getHand().get(Game.rand.nextInt(getHand().size())));
+			}
+			catch (Exception e)
+			{
+				throw new RuntimeException(e);
+			}
 		}
+
 		
 		
 		
 //		System.out.println("Action chosen: "+action);
 		
 		return action;
+	}
+
+	@Override
+	public Object[] requestData(Object... data)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

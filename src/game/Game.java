@@ -37,7 +37,7 @@ public class Game
 {
 	private static final int POINTS_PER_SCIENTIFIC_SYMBOL_SET = 7;
 	private static final int COINS_PER_POINT = 3;
-	static public Random rand = new Random(0);
+	static public Random rand = new Random(1234356);
 	public Game() throws Exception
 	{
 		
@@ -261,7 +261,7 @@ public class Game
 					// see if there are any end of age effect to apply.
 					for (Player player : gameState.getPlayers())
 					{
-						Utilities.filterElements(player.getGetGameElementsNewThisAge(), Effect.class).stream().filter(e-> e.getActivationPoint()==ActivationPoint.AT_END_OF_AGE).forEach(e->e.performEffect(finalGameState, null));
+						Utilities.filterElements(player.getGetGameElementsNewThisAge(), Effect.class).stream().filter(e-> e.getActivationPoint(finalGameState, player)==ActivationPoint.AT_END_OF_AGE).forEach(e->e.performEffect(finalGameState, null));
 					}
 				}
 			}
@@ -331,15 +331,14 @@ public class Game
 		// perform non-scoreable end of game effects 
 		for (Player player : gameState.getPlayers())
 		{
-			Utilities.filterElements(player.getGameElements(), Effect.class).stream().filter(e-> e.getActivationPoint()==ActivationPoint.AT_END_OF_GAME).forEach(e->e.performEffect(finalGameState, player));
+			Utilities.filterElements(player.getGameElements(), Effect.class).stream().filter(e-> e.getActivationPoint(finalGameState, player)==ActivationPoint.AT_END_OF_GAME).forEach(e->e.performEffect(finalGameState, player));
 		}
-		
-		
+
 		for (Player player : gameState.getPlayers())
 		{
 			// calculate guild score
 			Utilities.filterElements(player.getGameElements(), Guild.class).stream().forEach(
-					g->g.getEffects().stream().filter(e-> e.getActivationPoint()==ActivationPoint.AT_END_OF_GAME).forEach(e->e.performEffect(finalGameState, player))
+					g->g.getEffects().stream().filter(e-> e.getActivationPoint(finalGameState, player)==ActivationPoint.AT_END_OF_GAME).forEach(e->e.performEffect(finalGameState, player))
 					);
 			// calculate wonder stage score
 			Utilities.filterElements(Utilities.filterElements(player.getGameElements().stream(), WonderStage.class),Scoreable.class).forEach(s->player.modifyScore(s.calculateScore()));

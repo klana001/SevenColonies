@@ -24,7 +24,8 @@
               {
                 "class": "cards.rawmaterials.Stone"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.CopyRightAgeTwoWonderStage",
@@ -35,7 +36,8 @@
               {
                 "class": "cards.rawmaterials.Wood"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.CopyLeftOrRightAgeThreeWonderStage",
@@ -49,7 +51,8 @@
               {
                 "class": "cards.manufacturedgoods.Textile"
               }
-            ]
+            ],
+			"order": "3"
           }
         ]
       }
@@ -126,7 +129,8 @@
               {
                 "class": "cards.manufacturedgoods.Textile"
               }
-            ]
+            ],
+			"order": "1"
           }
         ]
       }
@@ -161,7 +165,8 @@
               {
                 "class": "cards.rawmaterials.Clay"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.BuildDiscardedBuildingWonderStage",
@@ -175,7 +180,8 @@
               {
                 "class": "cards.rawmaterials.Ore"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.PointWonderStage",
@@ -192,7 +198,8 @@
               {
                 "class": "cards.manufacturedgoods.Textile"
               }
-            ]
+            ],
+			"order": "3"
           }
         ]
       }
@@ -237,7 +244,8 @@
               {
                 "class": "cards.rawmaterials.Ore"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.CompositeWonderStage",
@@ -267,7 +275,8 @@
               {
                 "class": "cards.rawmaterials.Clay"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.BuildDiscardedBuildingWonderStage",
@@ -281,7 +290,8 @@
               {
                 "class": "cards.manufacturedgoods.Textile"
               }
-            ]
+            ],
+			"order": "3"
           }
         ]
       }
@@ -310,7 +320,8 @@
               {
                 "class": "cards.rawmaterials.Wood"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.BuildOneFreeBuildingEachAgeWonderStage",
@@ -321,7 +332,8 @@
               {
                 "class": "cards.rawmaterials.Stone"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.PointWonderStage",
@@ -338,7 +350,8 @@
               {
                 "class": "cards.rawmaterials.Ore"
               }
-            ]
+            ],
+			"order": "3"
           }
         ]
       }
@@ -361,7 +374,8 @@
               {
                 "class": "cards.rawmaterials.Wood"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.PointWonderStage",
@@ -378,7 +392,8 @@
               {
                 "class": "cards.rawmaterials.Stone"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.CopyGuildFromOneNeighbourWonderStage",
@@ -392,7 +407,8 @@
               {
                 "class": "cards.manufacturedgoods.Textile"
               }
-            ]
+            ],
+			"order": "3"
           }
         ]
       }
@@ -421,7 +437,8 @@
               {
                 "class": "cards.rawmaterials.Stone"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.PointWonderStage",
@@ -441,7 +458,8 @@
               {
                 "class": "cards.rawmaterials.Wood"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.PointWonderStage",
@@ -464,7 +482,8 @@
               {
                 "class": "cards.rawmaterials.Stone"
               }
-            ]
+            ],
+			"order": "3"
           }
         ]
       }
@@ -493,7 +512,8 @@
               {
                 "class": "cards.rawmaterials.Wood"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.PointWonderStage",
@@ -513,7 +533,8 @@
               {
                 "class": "cards.rawmaterials.Wood"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.PointWonderStage",
@@ -533,7 +554,8 @@
               {
                 "class": "cards.rawmaterials.Clay"
               }
-            ]
+            ],
+			"order": "3"
           },
           {
             "class": "wonders.wonderstage.PointWonderStage",
@@ -559,7 +581,8 @@
               {
                 "class": "cards.rawmaterials.Stone"
               }
-            ]
+            ],
+			"order": "4"
           }
         ]
       }
@@ -588,7 +611,8 @@
               {
                 "class": "cards.rawmaterials.Wood"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.MilitaryWonderStage",
@@ -608,7 +632,8 @@
               {
                 "class": "cards.rawmaterials.Clay"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.PointWonderStage",
@@ -631,7 +656,8 @@
               {
                 "class": "cards.rawmaterials.Ore"
               }
-            ]
+            ],
+			"order": "3"
           }
         ]
       }
@@ -693,7 +719,8 @@
               {
                 "class": "cards.rawmaterials.Stone"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.CompositeWonderStage",
@@ -743,7 +770,8 @@
               {
                 "class": "cards.rawmaterials.Ore"
               }
-            ]
+            ],
+			"order": "2"
           }
         ]
       }
@@ -793,7 +821,8 @@
               {
                 "class": "cards.rawmaterials.Stone"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.CompositeWonderStage",
@@ -831,7 +860,8 @@
               {
                 "class": "cards.rawmaterials.Wood"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.CompositeWonderStage",
@@ -869,7 +899,8 @@
               {
                 "class": "cards.rawmaterials.Wood"
               }
-            ]
+            ],
+			"order": "3"
           }
         ]
       }
@@ -898,7 +929,8 @@
               {
                 "class": "cards.rawmaterials.Stone"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.CoinWonderStage",
@@ -920,7 +952,8 @@
               {
                 "class": "cards.rawmaterials.Wood"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.PointWonderStage",
@@ -940,7 +973,8 @@
               {
                 "class": "cards.manufacturedgoods.Textile"
               }
-            ]
+            ],
+			"order": "3"
           }
         ]
       }
@@ -969,7 +1003,8 @@
               {
                 "class": "cards.rawmaterials.Stone"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.WildRawMaterialWonderStage",
@@ -980,7 +1015,8 @@
               {
                 "class": "cards.rawmaterials.Ore"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.PointWonderStage",
@@ -997,7 +1033,8 @@
               {
                 "class": "cards.manufacturedgoods.Glass"
               }
-            ]
+            ],
+			"order": "3"
           }
         ]
       }
@@ -1020,7 +1057,8 @@
               {
                 "class": "cards.rawmaterials.Clay"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.WildManufacturedGoodWonderStage",
@@ -1031,7 +1069,8 @@
               {
                 "class": "cards.rawmaterials.Wood"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.PointWonderStage",
@@ -1051,7 +1090,8 @@
               {
                 "class": "cards.rawmaterials.Stone"
               }
-            ]
+            ],
+			"order": "3"
           }
         ]
       }
@@ -1080,7 +1120,8 @@
               {
                 "class": "cards.rawmaterials.Clay"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.WildScientificStructureWonderStage",
@@ -1094,7 +1135,8 @@
               {
                 "class": "cards.rawmaterials.Wood"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.PointWonderStage",
@@ -1117,7 +1159,8 @@
               {
                 "class": "cards.rawmaterials.Clay"
               }
-            ]
+            ],
+			"order": "3"
           }
         ]
       }
@@ -1146,7 +1189,8 @@
               {
                 "class": "cards.rawmaterials.Clay"
               }
-            ]
+            ],
+			"order": "1"
           },
           {
             "class": "wonders.wonderstage.PlayLastCardWonderStage",
@@ -1160,7 +1204,8 @@
               {
                 "class": "cards.manufacturedgoods.Glass"
               }
-            ]
+            ],
+			"order": "2"
           },
           {
             "class": "wonders.wonderstage.WildScientificStructureWonderStage",
@@ -1177,7 +1222,8 @@
               {
                 "class": "cards.manufacturedgoods.Papyrus"
               }
-            ]
+            ],
+			"order": "3"
           }
         ]
       }

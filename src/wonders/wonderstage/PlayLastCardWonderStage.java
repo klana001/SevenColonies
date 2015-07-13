@@ -3,6 +3,7 @@ package wonders.wonderstage;
 import java.util.Arrays;
 import java.util.Collection;
 
+import player.Player;
 import game.GameState;
 import interfaces.ExchangableItem;
 import common.NoCost;
@@ -11,14 +12,19 @@ import effects.Effect;
 
 public class PlayLastCardWonderStage extends WonderStage implements Effect
 {
-	public PlayLastCardWonderStage(Collection<ExchangableItem> cost)
+	public PlayLastCardWonderStage(Collection<ExchangableItem> cost, int orderIndex)
 	{
-		super(cost);
+		super(cost,orderIndex);
+	}
+	
+	public PlayLastCardWonderStage(int orderIndex)
+	{
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),orderIndex);
 	}
 	
 	public PlayLastCardWonderStage()
 	{
-		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),0);
 	}
 
 	@Override
@@ -34,7 +40,7 @@ public class PlayLastCardWonderStage extends WonderStage implements Effect
 	}
 
 	@Override
-	public ActivationPoint getActivationPoint()
+	public ActivationPoint getActivationPoint(GameState gameState, Player player)
 	{
 		return ActivationPoint.AT_END_OF_AGE;
 	}

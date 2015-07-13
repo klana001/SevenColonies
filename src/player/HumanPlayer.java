@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import classes.Card;
+import actions.BuildWonderStage;
 import actions.DiscardForThreeCoins;
 import wonders.Wonder;
 
@@ -72,7 +73,7 @@ public class HumanPlayer extends Player
 		
 		Action result = new Selector<Action>().select(actionCandidates, "Choose Action...");
 		
-		if (result instanceof DiscardForThreeCoins)
+		if (result instanceof DiscardForThreeCoins || result instanceof BuildWonderStage)
 		{
 			try
 			{
@@ -98,10 +99,20 @@ public class HumanPlayer extends Player
 		panel.add(new JLabel(player.getName()),BorderLayout.NORTH);
 		JTextArea ta = new JTextArea();
 		ta.append("Wonder: "+player.getWonder()+"\n");
+		player.getWonder().getWonderStages().stream().filter(w->w.isBuilt()).forEach(e->ta.append("      "+e+"\n"));
 		ta.append("Built:\n");
 		player.getGameElements().stream().forEach(e->ta.append("      "+e+"\n"));
 		panel.add(ta,BorderLayout.CENTER);
 		return panel;
 	}
+
+	@Override
+	public Object[] requestData(Object... data)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

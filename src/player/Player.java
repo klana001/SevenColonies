@@ -13,6 +13,7 @@ import common.Utilities;
 import classes.Card;
 import classes.Hand;
 import wonders.Wonder;
+import wonders.wonderstage.WonderStage;
 
 abstract public class Player
 {
@@ -132,6 +133,16 @@ abstract public class Player
 		addGameElement(card);
 	}
 	
+	public void buildWonderStage(WonderStage wonderStage,GameState gameState, Card buriedCard)
+	{
+		if (!getHand().remove(buriedCard))
+		{
+			throw new RuntimeException("tried to bury card: "+buriedCard+ " from player: "+this+" however player did not have the card in hand.");
+		}
+		getWonder().buildStage(wonderStage,gameState,this);
+	}
+	
+	
 	private void addGameElement(GameElement element)
 	{
 		gameElementsNewThisAge.add(element);
@@ -174,5 +185,7 @@ abstract public class Player
 	{
 		return new ArrayList<MilitaryToken>(militaryTokens);
 	}
+
+	abstract public Object[] requestData(Object... data);
 	
 }

@@ -133,7 +133,7 @@ public class GameState
 		return players.get(playerId);
 	}
 
-	public void takeFromBank(int amount, final Player player)
+	public void takeFromBank(int amount, final Player player, GameState gameState)
 	{
 		final List<Effect> bankEffects = new ArrayList<Effect>();
 		players.forEach(
@@ -141,7 +141,7 @@ public class GameState
 						Utilities.filterElements(
 								p.getGameElements(),Effect.class
 								).stream().filter(
-										e->e.getActivationPoint()==ActivationPoint.TAKE_FROM_BANK
+										e->e.getActivationPoint(gameState, player)==ActivationPoint.TAKE_FROM_BANK
 										).collect(Collectors.toList()
 								)
 						)
@@ -165,7 +165,7 @@ public class GameState
 		
 		if (player.getHand().contains(cardToDiscard))
 		{
-			takeFromBank(3,player);
+			takeFromBank(3,player,this);
 			player.getHand().remove(cardToDiscard);
 			discards.add(cardToDiscard);
 		}

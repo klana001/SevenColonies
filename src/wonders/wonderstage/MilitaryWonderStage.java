@@ -12,14 +12,19 @@ public class MilitaryWonderStage extends WonderStage implements Military
 {
 	private final int strengh;
 
-	public MilitaryWonderStage( int strength)
+	public MilitaryWonderStage( int strength,int orderIndex)
 	{
-		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),strength);
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),strength,orderIndex);
 	}
 	
-	public MilitaryWonderStage(Collection<ExchangableItem> cost, int strength)
+	public MilitaryWonderStage( int strength)
 	{
-		super(cost);
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),strength,0);
+	}
+	
+	public MilitaryWonderStage(Collection<ExchangableItem> cost, int strength,int orderIndex)
+	{
+		super(cost,orderIndex);
 		this.strengh=strength;
 	}
 	

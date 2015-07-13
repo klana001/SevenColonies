@@ -32,13 +32,13 @@ public class TradePayment extends Payment
 		Utilities.filterElements(currentPlayer.getGameElements(),Effecting.class).stream().forEach(effecting->
 				currentPlayerTradeEffects.addAll(
 						effecting.getEffect().stream().filter(e->
-							e.getActivationPoint()==ActivationPoint.EVERY_TRADE).collect(Collectors.toList())));
+							e.getActivationPoint(gameState, currentPlayer)==ActivationPoint.EVERY_TRADE).collect(Collectors.toList())));
 		
 		final List<Effect> tradingWithPlayerTradeEffects = new ArrayList<Effect>();
 		Utilities.filterElements(tradingWithPlayer.getGameElements(),Effecting.class).stream().forEach(effecting->
 			tradingWithPlayerTradeEffects.addAll(
 						effecting.getEffect().stream().filter(e->
-							e.getActivationPoint()==ActivationPoint.EVERY_TRADE).collect(Collectors.toList())));
+							e.getActivationPoint(gameState, tradingWithPlayer)==ActivationPoint.EVERY_TRADE).collect(Collectors.toList())));
 		
 		for (Effect effect : currentPlayerTradeEffects)
 		{

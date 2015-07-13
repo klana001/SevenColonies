@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import common.Utilities;
 import cards.IManufacturedGood;
@@ -27,9 +28,11 @@ import effects.commercial.LeftTradeRawMaterialsForOneCoin;
 import effects.commercial.RightTradeRawMaterialsForOneCoin;
 import effects.commercial.TradeManufacturedGoodsForOneCoin;
 import actions.Build;
+import actions.BuildWonderStage;
 import actions.DiscardForThreeCoins;
 import actions.Upgrade;
 import player.Player;
+import wonders.wonderstage.WonderStage;
 
 public class ActionGenerator
 {
@@ -143,6 +146,10 @@ public class ActionGenerator
 		
 		populateUpgradeActions(actions,player,gameState);
 		
+		populateBuildWonderStageActions(actions,player,gameState); 
+
+		
+		
 				
 		return actions;
 	}
@@ -167,22 +174,27 @@ public class ActionGenerator
 		Utilities.filterElements(player.getGameElements(),Effecting.class).stream().forEach(effecting->
 				tradeEffectsMaster.addAll(
 						effecting.getEffect().stream().filter(e->
-							e.getActivationPoint()==ActivationPoint.EVERY_TRADE).collect(Collectors.toList())));
+							e.getActivationPoint(gameState, player)==ActivationPoint.EVERY_TRADE).collect(Collectors.toList())));
 		
 		final TradeCostGenerator tradeCostGenerator = new TradeCostGenerator(player,tradeEffectsMaster); 
 		
 		// iterate over all cards in hand and see what can be constructed and how (combinations of requirements for each card).
 		final List<CostedOwnedExchangableItem> availableExchangableItems = new ArrayList<CostedOwnedExchangableItem>();
-		
+
+		// add default action to discard a card for 3 coins
 		availableExchangableItems.add(new CostedOwnedExchangableItem(new Coin(player.getCoins()), 0,player));
+		
+		// add any player built cards that that yield a raw material or manufactured good.
 		Utilities.filterElements(player.getGameElements(),ExchangableItem.class).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, 0,player)));
 		
+		// add any wonder stages effects that yield a raw material or manufactured good.
+		Stream<WonderStage> playerWonderStages = gameState.getPlayer(player.getRightNeighbourId()).getWonder().getWonderStages().stream().filter(stage-> stage.isBuilt());
+		Utilities.filterElements(playerWonderStages,ExchangableItem.class).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, 0,player)));
+
+		// add trading coins for use of neighbour's played cards 
 		Utilities.filterElements(gameState.getPlayer(player.getLeftNeighbourId()).getGameElements().stream(),ExchangableItem.class).filter(e->!Coin.class.isInstance(e)).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, tradeCostGenerator.getTradeCost(e,player.getLeftNeighbourId()),gameState.getPlayer(player.getLeftNeighbourId()))));
 		Utilities.filterElements(gameState.getPlayer(player.getRightNeighbourId()).getGameElements().stream(),ExchangableItem.class).filter(e->!Coin.class.isInstance(e)).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, tradeCostGenerator.getTradeCost(e,player.getRightNeighbourId()),gameState.getPlayer(player.getRightNeighbourId()))));
-		
 
-//		Collection<Effect> output = Utilities.filterElements(player.getGameElements(),Effect.class);
-		
 
 		
 		for (Card card : player.getHand())
@@ -211,6 +223,62 @@ public class ActionGenerator
 			}
 		}
 	}
+	
+	private static void populateBuildWonderStageActions(ActionMap actions,final Player player, GameState gameState)
+	{
+		final List<Effect> tradeEffectsMaster = new ArrayList<Effect>();
+		Utilities.filterElements(player.getGameElements(),Effecting.class).stream().forEach(effecting->
+				tradeEffectsMaster.addAll(
+						effecting.getEffect().stream().filter(e->
+							e.getActivationPoint(gameState, player)==ActivationPoint.EVERY_TRADE).collect(Collectors.toList())));
+		
+		final TradeCostGenerator tradeCostGenerator = new TradeCostGenerator(player,tradeEffectsMaster); 
+		
+		// iterate over all cards in hand and see what can be constructed and how (combinations of requirements for each card).
+		final List<CostedOwnedExchangableItem> availableExchangableItems = new ArrayList<CostedOwnedExchangableItem>();
+
+		// add default action to discard a card for 3 coins
+		availableExchangableItems.add(new CostedOwnedExchangableItem(new Coin(player.getCoins()), 0,player));
+		
+		// add any player built cards that that yield a raw material or manufactured good.
+		Utilities.filterElements(player.getGameElements(),ExchangableItem.class).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, 0,player)));
+		
+		// add any wonder stages effects that yield a raw material or manufactured good.
+		Stream<WonderStage> playerWonderStages = gameState.getPlayer(player.getRightNeighbourId()).getWonder().getWonderStages().stream().filter(stage-> stage.isBuilt());
+		Utilities.filterElements(playerWonderStages,ExchangableItem.class).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, 0,player)));
+
+		// add trading coins for use of neighbour's played cards 
+		Utilities.filterElements(gameState.getPlayer(player.getLeftNeighbourId()).getGameElements().stream(),ExchangableItem.class).filter(e->!Coin.class.isInstance(e)).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, tradeCostGenerator.getTradeCost(e,player.getLeftNeighbourId()),gameState.getPlayer(player.getLeftNeighbourId()))));
+		Utilities.filterElements(gameState.getPlayer(player.getRightNeighbourId()).getGameElements().stream(),ExchangableItem.class).filter(e->!Coin.class.isInstance(e)).forEach(e->availableExchangableItems.add(new CostedOwnedExchangableItem(e, tradeCostGenerator.getTradeCost(e,player.getRightNeighbourId()),gameState.getPlayer(player.getRightNeighbourId()))));
+
+	
+		for (WonderStage wonderStage : player.getWonder().getNextWonderStage())
+		{
+			List<CostedOwnedExchangableItem> availableExchangableItemsCopy = Utilities.cloneObject(availableExchangableItems);
+			List<ExchangableItem> wonderStageRequirements = new ArrayList<ExchangableItem>(Utilities.cloneObject(wonderStage.getCost()));
+			Player localPlayerCopy = Utilities.cloneObject(player);
+	
+			if (wonderStageRequirements.isEmpty())
+			{
+				actions.put(new BuildWonderStage(player,wonderStage,new ArrayList<CostedOwnedExchangableItem>()));
+			}
+			else
+			{
+				
+				List<Effect> tradeEffects = Utilities.cloneObject(tradeEffectsMaster);
+				
+				Set<Costings> uniqueCostings = resolveUniqueCostingCombinations(gameState, localPlayerCopy, wonderStageRequirements, availableExchangableItemsCopy,tradeEffects );
+				
+				
+				// create and add build card actions for each unique costing...
+				for (Costings costing : uniqueCostings)
+				{
+					actions.put(new BuildWonderStage(player,wonderStage,costing.getCostings()));
+				}
+			}
+		}
+	}
+	
 	
 	/**
 	 * For the given requirement, creates combinations of available exchangeable items that meet the requirement.

@@ -4,6 +4,7 @@ package wonders.wonderstage;
 import java.util.Arrays;
 import java.util.Collection;
 
+import player.Player;
 import common.NoCost;
 import common.Utilities;
 import effects.Effect;
@@ -13,14 +14,19 @@ import interfaces.ExchangableItem;
 
 public class RawMaterialTradeWithNeighboursCostOneCoinWonderStage extends WonderStage implements Effect
 {
-	public RawMaterialTradeWithNeighboursCostOneCoinWonderStage(Collection<ExchangableItem> cost)
+	public RawMaterialTradeWithNeighboursCostOneCoinWonderStage(Collection<ExchangableItem> cost,int orderIndex)
 	{
-		super(cost);
+		super(cost,orderIndex);
+	}
+	
+	public RawMaterialTradeWithNeighboursCostOneCoinWonderStage(int orderIndex)
+	{
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),orderIndex);
 	}
 	
 	public RawMaterialTradeWithNeighboursCostOneCoinWonderStage()
 	{
-		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),0);
 	}
 	
 
@@ -40,7 +46,7 @@ public class RawMaterialTradeWithNeighboursCostOneCoinWonderStage extends Wonder
 	}
 
 	@Override
-	public ActivationPoint getActivationPoint()
+	public ActivationPoint getActivationPoint(GameState gameState, Player player)
 	{
 		return ActivationPoint.EVERY_TURN;
 	}

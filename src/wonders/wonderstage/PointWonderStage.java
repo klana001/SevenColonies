@@ -12,14 +12,19 @@ public class PointWonderStage extends WonderStage implements Scoreable
 {
 	private final int score;
 
-	public PointWonderStage( int score)
+	public PointWonderStage( int score, int orderIndex)
 	{
-		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),score);
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),score, orderIndex);
 	}
 	
-	public PointWonderStage(Collection<ExchangableItem> cost, int score)
+	public PointWonderStage( int score)
 	{
-		super(cost);
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),score, 0);
+	}
+	
+	public PointWonderStage(Collection<ExchangableItem> cost, int score,int orderIndex)
+	{
+		super(cost,orderIndex);
 		this.score=score;
 	}
 	

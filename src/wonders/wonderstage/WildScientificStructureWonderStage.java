@@ -12,14 +12,19 @@ import cards.IScientificStructure;
 public class WildScientificStructureWonderStage extends WonderStage implements IScientificStructure
 {
 
-	public WildScientificStructureWonderStage(Collection<ExchangableItem> cost)
+	public WildScientificStructureWonderStage(Collection<ExchangableItem> cost,int orderIndex)
 	{
-		super(cost);
+		super(cost,orderIndex);
+	}
+	
+	public WildScientificStructureWonderStage(int orderIndex)
+	{
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),orderIndex);
 	}
 	
 	public WildScientificStructureWonderStage()
 	{
-		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),0);
 	}
 	
 	@Override

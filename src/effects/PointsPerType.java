@@ -1,5 +1,6 @@
 package effects;
 
+import player.Player;
 import game.GameState;
 
 abstract public class PointsPerType implements Effect
@@ -22,7 +23,7 @@ abstract public class PointsPerType implements Effect
 	}
 
 	@Override
-	public ActivationPoint getActivationPoint()
+	public ActivationPoint getActivationPoint(GameState gameState, Player player)
 	{
 		return ActivationPoint.AT_END_OF_GAME;
 	}

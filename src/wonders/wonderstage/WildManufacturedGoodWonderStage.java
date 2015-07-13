@@ -14,14 +14,19 @@ import effects.manufacturedgoods.WildManufacturedGood;
 public class WildManufacturedGoodWonderStage extends WonderStage implements IManufacturedGood
 {
 	private WildManufacturedGood wildManufacturedGood = new WildManufacturedGood();
-	public WildManufacturedGoodWonderStage(Collection<ExchangableItem> cost)
+	public WildManufacturedGoodWonderStage(Collection<ExchangableItem> cost,int orderIndex)
 	{
-		super(cost);
+		super(cost,orderIndex);
+	}
+	
+	public WildManufacturedGoodWonderStage(int orderIndex)
+	{
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),orderIndex);
 	}
 	
 	public WildManufacturedGoodWonderStage()
 	{
-		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),0);
 	}
 	
 

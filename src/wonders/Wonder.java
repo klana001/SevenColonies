@@ -14,12 +14,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import player.Player;
 import common.Military;
 import common.MutableInteger;
 import common.Scoreable;
@@ -39,17 +42,21 @@ public class Wonder implements Scoreable,Military,GameElement,Effect
 	
 	
 	final private List<WonderStage> wonderStages;
+	final private Map<Integer,Collection<WonderStage>> wonderStagesPerOrderIndex;
 	final private String name;
 //	final private List<WonderStage> wonderStagesTemplate;
 	final private List<GameElement> wonderBenefit;
 	
-	public Wonder(String wonderName, List<WonderStage> wonderStages, List<GameElement> wonderBenefit)
+	public Wonder(String wonderName, Map<Integer,Collection<WonderStage>> wonderStagesPerOrderIndex, List<GameElement> wonderBenefit)
 	{
 		super();
 //		wonderStagesTemplate = getWonderStagesTemplate();
 		this.name=wonderName;
-		this.wonderStages=wonderStages;
+		this.wonderStagesPerOrderIndex=wonderStagesPerOrderIndex;
 		this.wonderBenefit=wonderBenefit;
+		
+		wonderStages=new ArrayList<WonderStage>();
+		wonderStagesPerOrderIndex.keySet().stream().forEach(k->wonderStages.addAll(wonderStagesPerOrderIndex.get(k)));
 	}
 	
 	/**
@@ -84,7 +91,7 @@ public class Wonder implements Scoreable,Military,GameElement,Effect
 			JSONObject wonderJson = (JSONObject) wonderEntryJson.get("wonder");
 			final String wonderName = (String) wonderJson.get("name");
 			final List<GameElement> wonderBenefit = new ArrayList<GameElement>();
-			final List<WonderStage> wonderStages = new ArrayList<WonderStage>();
+			final Map<Integer,Collection<WonderStage>> wonderStages = new HashMap<Integer, Collection<WonderStage>>();
 			
 			ArrayList<JSONObject> benefitJsonList = (ArrayList<JSONObject>) wonderJson.get("benefit");
 			for (JSONObject benefitJson : benefitJsonList)
@@ -95,7 +102,14 @@ public class Wonder implements Scoreable,Military,GameElement,Effect
 			ArrayList<JSONObject> wonderStageJsonList = (ArrayList<JSONObject>) wonderJson.get("wonderStages");
 			for (JSONObject wonderStageJson : wonderStageJsonList)
 			{
-				wonderStages.add(createWonderStageClass(wonderStageJson));
+				WonderStage wonderStage = createWonderStageClass(wonderStageJson);
+				Collection<WonderStage> wonderStagesForBuildIndex = wonderStages.get(wonderStage.getBuildOrderIndex());
+				if (wonderStagesForBuildIndex == null)
+				{
+					wonderStagesForBuildIndex= new ArrayList<WonderStage>();
+					wonderStages.put(wonderStage.getBuildOrderIndex(), wonderStagesForBuildIndex);
+				}
+				wonderStagesForBuildIndex.add(wonderStage);
 			}
 			
 			Wonder newWonder = new Wonder(wonderName,wonderStages,wonderBenefit);
@@ -136,12 +150,14 @@ public class Wonder implements Scoreable,Military,GameElement,Effect
 			costInstanceList.add((ExchangableItem) Utilities.createClass(costElementJson));
 		}
 		
+		int orderIndex = Integer.parseInt((String) classJson.get("order"));
+		
 		constructorArgumentInstances.add(costInstanceList);
 		
 		// do we have a constructor json element?
 		if (constructorArguments != null)
 		{
-			// we always have cost as the first argument...
+			// we always have cost as the first argument
 			constructorArgumentsCount=constructorArguments.size()+1;
 			
 			for (Object constructorArgument : constructorArguments)
@@ -158,6 +174,13 @@ public class Wonder implements Scoreable,Military,GameElement,Effect
 				}
 			}
 		}
+
+		
+		// add the build order index to list of constructor elements
+		constructorArgumentsCount++;
+		constructorArgumentInstances.add(orderIndex);
+
+		
 		final int constructorArgumentsCountFinal = constructorArgumentsCount;
 		
 		
@@ -190,16 +213,19 @@ public class Wonder implements Scoreable,Military,GameElement,Effect
 		return wonderBenefit;
 	}
 
-	public void buildStage(WonderStage stage)
+	public void buildStage(WonderStage wonderStage,GameState gameState, Player player)
 	{
-		WonderStage wonderStage = getWonderStages().stream().findFirst().orElseThrow(RuntimeException::new);
+//		WonderStage wonderStage = getWonderStages().stream().findFirst().orElseThrow(RuntimeException::new);
+		
+		if (wonderStage.isBuilt())
+			throw new RuntimeException("Wonder Stage : "+wonderStage+" alread has been built.");
 		wonderStage.setBuilt(true);
 		if (wonderStage instanceof Effect)
 		{
 			Effect effectWonderStage = (Effect) wonderStage;
-			if (effectWonderStage.getActivationPoint()==ActivationPoint.INSTANTLY)
+			if (effectWonderStage.getActivationPoint(gameState, player)==ActivationPoint.INSTANTLY)
 			{
-				effectWonderStage.performEffect(null, null);
+				effectWonderStage.performEffect(gameState, player);
 			}
 		}
 	}
@@ -240,11 +266,47 @@ public class Wonder implements Scoreable,Military,GameElement,Effect
 	}
 	
 	@Override
-	public ActivationPoint getActivationPoint(){
+	public ActivationPoint getActivationPoint(GameState gameState, Player player){
 		throw new RuntimeException("Should not be called");
 	}
 
-
+	/**
+	 * Returns the next wonder stage available to build... can be more than one option.
+	 * @return
+	 */
+	public Collection<WonderStage> getNextWonderStage()
+	{
+		int minOrderIndex=Integer.MAX_VALUE;
+		for (WonderStage wonderStage : wonderStages)
+		{
+			if (!wonderStage.isBuilt())
+			{
+				if (wonderStage.getBuildOrderIndex()<minOrderIndex)
+				{
+					minOrderIndex=wonderStage.getBuildOrderIndex();
+				}
+			}
+		}
+		Collection<WonderStage> result;
+		if (minOrderIndex==Integer.MAX_VALUE)
+		{
+			result = new ArrayList<WonderStage>(0);
+		}
+		else
+		{
+			result = wonderStagesPerOrderIndex.get(minOrderIndex);
+		}
+		return result;
+	}
+	
+	/**
+	 * Returns the next wonder stages available at the given orderIndex.
+	 * @return
+	 */
+	public Collection<WonderStage> getWonderStage(int orderIndex)
+	{
+		return wonderStagesPerOrderIndex.get(orderIndex);
+	}
 
 	@Override
 	public String getName()

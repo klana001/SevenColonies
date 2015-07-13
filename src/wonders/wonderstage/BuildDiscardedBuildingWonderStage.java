@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import player.Player;
 import common.NoCost;
 import common.Utilities;
 import effects.Effect;
@@ -14,14 +15,19 @@ import interfaces.ExchangableItem;
 
 public class BuildDiscardedBuildingWonderStage extends WonderStage implements Effect
 {
-	public BuildDiscardedBuildingWonderStage(List<ExchangableItem> cost)
+	public BuildDiscardedBuildingWonderStage(List<ExchangableItem> cost,int orderIndex)
 	{
-		super(cost);
+		super(cost,orderIndex);
+	}
+	
+	public BuildDiscardedBuildingWonderStage(int orderIndex)
+	{
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),orderIndex);
 	}
 	
 	public BuildDiscardedBuildingWonderStage()
 	{
-		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),0);
 	}
 
 	@Override
@@ -37,7 +43,7 @@ public class BuildDiscardedBuildingWonderStage extends WonderStage implements Ef
 	}
 
 	@Override
-	public ActivationPoint getActivationPoint()
+	public ActivationPoint getActivationPoint(GameState gameState, Player player)
 	{
 		return ActivationPoint.INSTANTLY;
 	}

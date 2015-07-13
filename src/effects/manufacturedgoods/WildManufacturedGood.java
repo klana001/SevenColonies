@@ -53,7 +53,7 @@ public class WildManufacturedGood implements Effect, IManufacturedGood
 	}
 
 	@Override
-	public ActivationPoint getActivationPoint()
+	public ActivationPoint getActivationPoint(GameState gameState, Player player)
 	{
 		return null; // effect is redundant.
 	}

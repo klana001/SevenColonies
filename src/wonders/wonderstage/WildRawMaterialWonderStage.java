@@ -14,16 +14,20 @@ import effects.rawmaterials.WildRawMaterial;
 public class WildRawMaterialWonderStage extends WonderStage implements IRawMaterial
 {
 	private WildRawMaterial wildRawMaterial = new WildRawMaterial();
-	public WildRawMaterialWonderStage(Collection<ExchangableItem> cost)
+	public WildRawMaterialWonderStage(Collection<ExchangableItem> cost,int orderIndex)
 	{
-		super(cost);
+		super(cost,orderIndex);
+	}
+	
+	public WildRawMaterialWonderStage(int orderIndex)
+	{
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),orderIndex);
 	}
 	
 	public WildRawMaterialWonderStage()
 	{
-		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),0);
 	}
-	
 
 
 	@Override

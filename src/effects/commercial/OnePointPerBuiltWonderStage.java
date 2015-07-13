@@ -3,6 +3,7 @@ package effects.commercial;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import player.Player;
 import wonders.wonderstage.WonderStage;
 import cards.rawmaterials.RawMaterial;
 import effects.Effect;
@@ -40,7 +41,7 @@ public class OnePointPerBuiltWonderStage implements Effect
 	}
 
 	@Override
-	public ActivationPoint getActivationPoint()
+	public ActivationPoint getActivationPoint(GameState gameState, Player player)
 	{
 		return ActivationPoint.AT_END_OF_GAME;
 	}

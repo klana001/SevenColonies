@@ -80,7 +80,7 @@ public class PointsPerCardType implements Effect,JSONReadable
 
 
 	@Override
-	public ActivationPoint getActivationPoint()
+	public ActivationPoint getActivationPoint(GameState gameState, Player player)
 	{
 		return activationPoint;
 	}

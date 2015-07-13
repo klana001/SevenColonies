@@ -1,5 +1,6 @@
 package effects.commercial;
 
+import player.Player;
 import cards.rawmaterials.RawMaterial;
 import effects.Effect;
 import game.GameState;
@@ -20,7 +21,7 @@ public class RightTradeRawMaterialsForOneCoin implements Effect
 	}
 
 	@Override
-	public ActivationPoint getActivationPoint()
+	public ActivationPoint getActivationPoint(GameState gameState, Player player)
 	{
 		return ActivationPoint.EVERY_TRADE;
 	}

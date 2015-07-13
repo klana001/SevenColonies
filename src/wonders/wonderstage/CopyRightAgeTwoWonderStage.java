@@ -4,6 +4,7 @@ package wonders.wonderstage;
 import java.util.Arrays;
 import java.util.Collection;
 
+import player.Player;
 import common.NoCost;
 import common.Utilities;
 import effects.Effect;
@@ -13,14 +14,14 @@ import interfaces.ExchangableItem;
 
 public class CopyRightAgeTwoWonderStage extends WonderStage implements Effect
 {
-	public CopyRightAgeTwoWonderStage(Collection<ExchangableItem> cost)
+	public CopyRightAgeTwoWonderStage(Collection<ExchangableItem> cost,int orderIndex)
 	{
-		super(cost);
+		super(cost,orderIndex);
 	}
 	
-	public CopyRightAgeTwoWonderStage()
+	public CopyRightAgeTwoWonderStage(int orderIndex)
 	{
-		this(Arrays.asList(new ExchangableItem[]{new NoCost()}));
+		this(Arrays.asList(new ExchangableItem[]{new NoCost()}),orderIndex);
 	}
 
 
@@ -40,7 +41,7 @@ public class CopyRightAgeTwoWonderStage extends WonderStage implements Effect
 	}
 
 	@Override
-	public ActivationPoint getActivationPoint()
+	public ActivationPoint getActivationPoint(GameState gameState, Player player)
 	{
 		throw new RuntimeException("TBD");
 		// dependant on copied wonder... but firstly will be instantaneous to allow peform effect to copy wonder!
