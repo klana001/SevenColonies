@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="SevenColonies">
+    <property name="name" value="SevenColonies"/>
+    <property location="${basedir}/build" name="build"/>
+    <property location="${build}/classes" name="build.classes"/>
+    <property location="${basedir}/src" name="src.dir"/>
+    <property location="${basedir}/lib" name="lib.dir"/>
+    <property name="classpath" value="${lib.dir}"/>
+  
+  
+      <!-- Classpath for the project -->	
+    <path id="master-classpath">
+      <fileset dir="${classpath}">
+        <include name="*.jar"/>
+      </fileset>
+    </path>
+  
+  
+    <!--Application build-->
+    <target depends="clean" description="Builds the application" name="build">
+        <!--Create directory-->
+        <mkdir dir="${build.classes}"/>
+      
+        <!--Compile source code-->
+        <javac debug="false" deprecation="true" destdir="${build.classes}" includeantruntime="true" optimize="true" srcdir="${src.dir}">
+      <classpath refid="master-classpath"/>
+      </javac>
+        <!--Copy necessary files-->
+        <copy todir="${build.classes}">
+            <fileset dir="${src.dir}" excludes="**/*.java" includes="**/*.*"/>
+        </copy>
+      
+        <!--Create JAR-file-->
+        <jar jarfile="${build}/${name}.jar">
+            <fileset dir="${build.classes}"/>
+        </jar>
+      
+    <!-- Classpath for running the project -->	
+    <path id="libs">
+      <fileset dir="${lib.dir}">
+        <include name="*.jar"/>
+      </fileset>
+      <pathelement location="${build}/${name}.jar"/>
+    </path>
+      
+        <java classname="Main" fork="true">
+            <classpath refid="libs"/>
+       </java>
+    </target>
+    <!--Clean up-->
+    <target description="Remove all temporary files" name="clean">
+        <!--Delete files-->
+        <delete dir="${build.classes}"/>
+    </target>
+</project>
